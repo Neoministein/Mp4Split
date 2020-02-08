@@ -1,6 +1,6 @@
-#Settingsfile
+# Settingsfile
 
-##DebugLevel
+## DebugLevel
 
 Default : 10
 The debug level defines what being showed to you when the application is running. There 5 Levels:
@@ -13,48 +13,49 @@ Level 1 "Error": Shows you when something went wrong but the program can still f
 Level 0 "Fatal": Show you messages when horrible went wrong and the operation can't function anymore
 ```
 
-##ClipLength
+## ClipLength
 
 Default : 30
 This determines how many seconds the clip will go back from the moment to pressed the timestamp macro.
 
-##SecondsUntilCut
+## SecondsUntilCut
 
 Default : 10
 Sometime NVIDIA does some post processing on the video and it can happen that Mp4Split can't access it. SecondsUntilCut is the time that the program will wait before it will try to cut the video.
-##TrysToCut
+
+## TrysToCut
 
 Default : 5
 If you can access the video trysToCut is the amount of time the program will try again to cut it until it gives up.
 
-##FileLocation:
+## FileLocation:
 
 Default :C:\Users\Default\Videos
 This is the location Mp4Split will look for the newest created Video to cut.
 
-##Macro
+## Macro
 
 If you want to change it you please see [List](MacroList)
 
-###TimestampMacroOne
+### TimestampMacroOne
 
 Default : 56 
 56 = Alt
 The first button you need to press to activate the timestamp macro.
 
-###TimestampMacroTwo
+### TimestampMacroTwo
 
 Default : 11
 11 = "0"
 The second button you need to press to activate the timestamp macro.
 
-###CutVideoMacroOne
+### CutVideoMacroOne
 
 Default : 56
 56 = Alt
 The first button you need to press to activate the cut video macro.
 
-###CutVideoMactoTwo
+### CutVideoMactoTwo
 
 Default : 10
 10 = "9"
