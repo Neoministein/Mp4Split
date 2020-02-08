@@ -1,0 +1,10 @@
+com\mp4splitmaven\Settings.class
+com\mp4splitmaven\HelperClass\FfmpegManager.class
+com\mp4splitmaven\WhilePlaying.class
+com\mp4splitmaven\Main.class
+com\mp4splitmaven\FinalCut.class
+com\mp4splitmaven\HelperClass\FileManager.class
+com\mp4splitmaven\LoggingHandler.class
+com\mp4splitmaven\HelperClass\InputFileManager.class
+com\mp4splitmaven\HelperClass\StreamGobbler.class
+com\mp4splitmaven\HelperClass\TimeStampManager.class
