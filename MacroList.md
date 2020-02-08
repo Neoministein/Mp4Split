@@ -1,8 +1,8 @@
 # MacroList
-
-*ESCAPE = 1
-*F1 = 59
-*F2 = 60
+```
+ESCAPE = 1
+F1 = 59
+F2 = 60
 F3 = 61
 F4 = 62
 F5 = 63
@@ -138,3 +138,4 @@ SUN_UNDO = 65402
 SUN_COPY = 65404
 SUN_INSERT = 65405
 SUN_CUT = 65403
+```
