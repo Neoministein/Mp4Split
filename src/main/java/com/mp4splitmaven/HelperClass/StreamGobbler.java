@@ -19,7 +19,7 @@ class StreamGobbler implements Runnable {
         try {
             int c;
             while ((c = is.read()) != -1)
-                os.print((char) c);
+                LoggingHandler.printNoLog(LoggingHandler.DEBUG, (char) c + "");
         } catch (IOException e) {
             LoggingHandler.println(LoggingHandler.WARN,"There was a problem trying to manage the OutputStream", e);
         }

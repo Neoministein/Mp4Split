@@ -82,23 +82,12 @@ public class WhilePlaying implements NativeKeyListener {
                 LoggingHandler.println(LoggingHandler.DEBUG, "video needs to be cut");
                 timeStampManager.clipHasEnded();
 
-
-                for(int i = 0; i < settings.getTrysToCut(); i++) {
-                    try {
-                        waitFor(settings.getSecondsUntilCut());
-                        String inputFileLocation = InputFileManager.lastFileModified(settings.getInputLocationt());
-
-                        FfmpegManager f = new FfmpegManager();
-                        timeStampManager.prepareTimeStamp(f.getVideoLength(settings.getFfprobeLocation(), inputFileLocation));
-                        f.cutVideo(settings.getFfmpegLocation(), inputFileLocation, timeStampManager.getCutStartTimeStamp(), timeStampManager.getclipLengthToCut());
-                        timeStampManager = null;
-                        break;
-                    }catch (Exception e){
-                        LoggingHandler.println(LoggingHandler.WARN, "Video could not be cut: ", e);
-                        LoggingHandler.println(LoggingHandler.DEBUG, "Trying again "+i+"/"+settings.getTrysToCut());
-                    }
+                if (hasCutWithoutError()) {
+                    LoggingHandler.println(LoggingHandler.INFO,"Video was cut successfully");
+                }else {
+                    throw new Exception();
                 }
-                throw new Exception();
+
             }catch (Exception e) {
                 LoggingHandler.println(LoggingHandler.FATAL, "Video could not be cut: ",e);
 
@@ -107,6 +96,26 @@ public class WhilePlaying implements NativeKeyListener {
         }else{
             LoggingHandler.println(LoggingHandler.DEBUG, "Video doesn't need to be cut");
         }
+        LoggingHandler.printNoLog(LoggingHandler.INFO,"----------\n");
+    }
+
+    private boolean hasCutWithoutError(){
+        for(int i = 0; i < settings.getTrysToCut(); i++) {
+            try {
+                waitFor(settings.getSecondsUntilCut());
+                String inputFileLocation = InputFileManager.lastFileModified(settings.getInputLocationt());
+
+                FfmpegManager f = new FfmpegManager();
+                timeStampManager.prepareTimeStamp(f.getVideoLength(settings.getFfprobeLocation(), inputFileLocation));
+                f.cutVideo(settings.getFfmpegLocation(), inputFileLocation, timeStampManager.getCutStartTimeStamp(), timeStampManager.getclipLengthToCut());
+                timeStampManager = null;
+            }catch (Exception e){
+                LoggingHandler.println(LoggingHandler.WARN, "Video could not be cut: ", e);
+                LoggingHandler.println(LoggingHandler.DEBUG, "Trying again "+i+"/"+settings.getTrysToCut());
+            }
+            return true;
+        }
+        return false;
     }
 
     private void doTimeStamp() {
