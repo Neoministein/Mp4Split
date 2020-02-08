@@ -35,7 +35,7 @@ This is the location Mp4Split will look for the newest created Video to cut.
 
 ## Macro
 
-If you want to change it you please see [List](MacroList)
+If you want to change it you please see [List](MacroList.md)
 
 ### TimestampMacroOne
 
