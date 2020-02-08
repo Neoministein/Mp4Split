@@ -30,7 +30,7 @@ If you can access the video trysToCut is the amount of time the program will try
 
 ## FileLocation:
 
-###### Default :C:\Users\Default\Videos
+###### Default : C:\Users\Default\Videos
 This is the location Mp4Split will look for the newest created Video to cut.
 
 ## Macro
