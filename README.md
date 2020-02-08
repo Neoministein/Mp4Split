@@ -1,6 +1,6 @@
 # Mp4Split
 
-This program was created as an addon for Nvidia's instant replay and record function. This application allows you to define highlight section while you are recording the video and automatically cuts them out after you stopped recording.
+This program was created as an addon for NVIDIA's instant replay and record function. This application allows you to define mutiple highlight sections, while you are recording the video and automatically cuts them out after you stopped recording.
 
 ## Getting Started
 
@@ -10,11 +10,12 @@ If you want to download the project please see "Project installation guide"
 
 ### Newest Deployed Version
 
-Here is the download link for the newest Version of Mp4Split.
+Here is the download link for the newest Version of Mp4Split:
 
 [Download](https://drive.google.com/file/d/15OgYNGXUTlzvazoMc8OPjjb61gDEqTV0/view)
 
 For instruction on how to use Mp4Split please see [Video]()
+*Video comming soon*
 
 ### Project installation guide
 
@@ -25,7 +26,7 @@ These instructions will get you a copy of the project up and running on your loc
 In order to compile Mp4Split you need to have JDK installed on your system (version 8 or later). This is basically the Java compiler.
 Maven also needs to be installed.
 
-Both ffmpeg.exe and ffprobe.exe which are used in the project are not uploaded to GitHub. You can find both files either at:  [Offical Site](https://www.ffmpeg.org/download.html) or in the download of the newest version.
+Both ffmpeg.exe and ffprobe.exe which are used in the project are not uploaded to GitHub. You can find both files either at [Offical Site](https://www.ffmpeg.org/download.html) or in the download of the newest version.
 
 #### Installing
 
