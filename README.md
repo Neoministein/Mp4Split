@@ -1,6 +1,6 @@
 # Mp4Split
 
-This program was created as an addon for NVIDIA's instant replay and record function. This application allows you to define mutiple highlight sections, while you are recording the video and automatically cuts them out after you stopped recording.
+This program was created as an addon for NVIDIA's instant replay and record function. This application allows you to define mutiple highlight sections while you are recording the video and automatically cuts them out after you stopped recording.
 
 ## Getting Started
 
