@@ -1,8 +1,8 @@
 # MacroList
 
-ESCAPE = 1
-F1 = 59
-F2 = 60
+*ESCAPE = 1
+*F1 = 59
+*F2 = 60
 F3 = 61
 F4 = 62
 F5 = 63
