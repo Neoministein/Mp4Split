@@ -15,7 +15,7 @@ Here is the download link for the newest Version of Mp4Split:
 [Download](https://drive.google.com/file/d/15OgYNGXUTlzvazoMc8OPjjb61gDEqTV0/view)
 
 For instruction on how to use Mp4Split please see [Video]()
-*Video comming soon*
+[*Video comming soon*]
 
 ### Project installation guide
 
