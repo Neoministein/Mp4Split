@@ -2,7 +2,7 @@
 
 ## DebugLevel
 
-Default : 10
+#### Default : 3
 The debug level defines what being showed to you when the application is running. There 5 Levels:
 ```
 Level 5 "Keypress": Shows you every Key you press
