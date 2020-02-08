@@ -5,7 +5,7 @@ DebugLevel:10
 ClipLength:30
 SecondsUntilCut:10
 TrysToCut:10
-FileLocation:F:\Windows Ordner\Videos\Titanfall 2
+FileLocation:"Save location of Video files"
 DoNotChange:56
 DoNotChange:11
 DoNotChange:56
