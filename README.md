@@ -45,15 +45,9 @@ mvn clean compile assembly:single
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [JNativeHook](https://github.com/kwhat/jnativehook) - Keyboard Listner for activation macro
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
 ## Authors
 
 * **Neoministein** - *Initial work* - [Neoministein](https://www.youtube.com/channel/UCtfBiBXVXqTotONMq6VSMbg)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
