@@ -109,11 +109,11 @@ public class WhilePlaying implements NativeKeyListener {
                 timeStampManager.prepareTimeStamp(f.getVideoLength(settings.getFfprobeLocation(), inputFileLocation));
                 f.cutVideo(settings.getFfmpegLocation(), inputFileLocation, timeStampManager.getCutStartTimeStamp(), timeStampManager.getclipLengthToCut());
                 timeStampManager = null;
+                return true;
             }catch (Exception e){
                 LoggingHandler.println(LoggingHandler.WARN, "Video could not be cut: ", e);
                 LoggingHandler.println(LoggingHandler.DEBUG, "Trying again "+i+"/"+settings.getTrysToCut());
             }
-            return true;
         }
         return false;
     }
