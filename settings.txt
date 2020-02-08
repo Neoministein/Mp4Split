@@ -5,7 +5,7 @@ DebugLevel:10
 ClipLength:30
 SecondsUntilCut:10
 TrysToCut:10
-FileLocation: C:\Users\Default\Videos
+FileLocation:C:\Users\Default\Videos
 TimestampMacroOne:56
 TimestampMacroTwo:11
 CutVideoMacroOne:56
