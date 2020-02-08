@@ -26,7 +26,7 @@ These instructions will get you a copy of the project up and running on your loc
 In order to compile Mp4Split you need to have JDK installed on your system (version 8 or later). This is basically the Java compiler.
 Maven also needs to be installed.
 
-Bolth ffmpeg.exe and ffprobe.exe which are used in the project are not uploaded to GitHub. You can find both files eather at: [ffmpegs offical site] (https://www.ffmpeg.org/download.html) or in the download of newest version.
+Bolth ffmpeg.exe and ffprobe.exe which are used in the project are not uploaded to GitHub. You can find both files eather at:  [Offical Site](https://www.ffmpeg.org/download.html) or in the download of newest version.
 
 #### Installing
 
