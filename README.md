@@ -10,7 +10,7 @@ If you want to download the project please see "Project installation guide"
 
 ### Newest Deployed Version
 
-Here is the download link for the newest Version of Mp4Split:[Download(https://drive.google.com/file/d/15OgYNGXUTlzvazoMc8OPjjb61gDEqTV0/view)
+Here is the download link for the newest Version of Mp4Split: [Download](https://drive.google.com/file/d/15OgYNGXUTlzvazoMc8OPjjb61gDEqTV0/view)
 
 For instruction on how to use Mp4Split please see [Video]()
 [*Video comming soon*]
