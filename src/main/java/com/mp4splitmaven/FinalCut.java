@@ -65,7 +65,10 @@ public class FinalCut {
             if (list != null) {
                 for (File fil : list) {
                     if (fil.isDirectory()) {
-                        findFile(name, fil);
+                        String subFolder;
+                        if(null != (subFolder = findSubFile(name, fil))){
+                            return subFolder;
+                        }
                     } else if (name.equalsIgnoreCase(fil.getName())) {
 
                         return fil.getAbsolutePath();
@@ -77,6 +80,28 @@ public class FinalCut {
             LoggingHandler.println(LoggingHandler.FATAL, "Can't find original File", e);
             throw new Exception();
         }
+    }
+
+    public String findSubFile(String name, File file) {
+        try {
+            File[] list = file.listFiles();
+            if (list != null) {
+                for (File fil : list) {
+                    if (fil.isDirectory()) {
+                        String subFolder;
+                        if(null != (subFolder = findSubFile(name, fil))){
+                            return subFolder;
+                        }
+                    } else if (name.equalsIgnoreCase(fil.getName())) {
+
+                        return fil.getAbsolutePath();
+                    }
+                }
+            }
+        }catch (Exception e){
+            LoggingHandler.println(LoggingHandler.FATAL, "Can't find original File in Subfolder", e);
+        }
+        return null;
     }
 
     public String getStartTimeFromName(String fileName){
