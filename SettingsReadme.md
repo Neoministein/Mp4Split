@@ -8,9 +8,9 @@ The debug level defines what being showed to you when the application is running
 Level 5 "Keypress": Shows you every Key you press
 Level 4 "Debug": Shows you Debug information while the program is running
 Level 3 "Info": Shows you in which state the program is
-Level 2 "Warn": Shows you warning when something didn't go as planned
+Level 2 "Warn": Shows you a warning when something didn't go as planned
 Level 1 "Error": Shows you when something went wrong but the program can still function
-Level 0 "Fatal": Show you messages when horrible went wrong and the operation can't function anymore
+Level 0 "Fatal": Show you a messages when something went horrible wrong and the operation needs to be stoped
 ```
 
 ## ClipLength
