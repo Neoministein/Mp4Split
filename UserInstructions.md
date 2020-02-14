@@ -41,7 +41,9 @@ For further information see [settingReadme](SettingsReadme.md).
 
 ## Use Mp4Split
 
-While you are recording and Mp4Split is open you can press the timestamp macro and by default, the last 30 seconds will be cut into a second clip, after you stop recording and you pressed the cutVideo macro.
+While you are recording and Mp4Split is open you can press the timestamp macro and by default, the last 30 seconds will be cut into a second clip, after you stop recording and you pressed the cutVideo macro. You would need to press the cutVideo macro right after you stopped recording to ensure that the timestamps are at the right place.
+
+I would recommend setting your stoprecording macro to the same as the cutVideo macro.
 
 There is no limit on how many timestamps you can set during a recording session.
 
