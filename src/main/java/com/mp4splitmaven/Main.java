@@ -16,6 +16,14 @@ public class Main {
                 case "1":
                     main.runFinalCut();
                     break;
+                case "2":
+                    main.startScreen();
+                    main.runWhilePlaying();
+                    break;
+                case "3":
+                    main.startScreen();
+                    main.runFinalCut();
+                    break;
                 default:
                     main.runWhilePlaying();
                     break;
@@ -27,7 +35,6 @@ public class Main {
 
         loggingHandler.setDebugLevel();
 
-
         WhilePlaying whilePlaying = new WhilePlaying();
         whilePlaying.startKeyLogger();
 
@@ -36,5 +43,8 @@ public class Main {
         FinalCut finalCut = new FinalCut();
 
         finalCut.finalCut();
+    }
+    public void startScreen(){
+
     }
 }

@@ -10,6 +10,7 @@ public class LoggingHandler {
     private static String stringToLog = "";
     private static int debugLevel = 10;
     private static String logLocation;
+    private static boolean screenEnabled = false;
 
     public final static int FATAL = 0;
     public final static int ERROR = 1;
@@ -57,8 +58,15 @@ public class LoggingHandler {
 
     public static void printNoLog(int loggingLevel,String text) {
         if (loggingLevel <= debugLevel){
-            System.out.print(text);
+            if(screenEnabled){
+                printToScreen(text);
+            }else {
+                System.out.print(text);
+            }
         }
+    }
+    private static void printToScreen(String text){
+        //TODO Implement SCREEN
     }
 
     private String createDebugFile() {
@@ -113,6 +121,12 @@ public class LoggingHandler {
         } catch (IOException e) {
             printNoLog(LoggingHandler.WARN,"There was a problem while writing to the Log");
         }
+    }
+    public static void enableScreen(){
+        screenEnabled = true;
+    }
+    public static boolean isScreenEnabled(){
+        return screenEnabled;
     }
 
 
