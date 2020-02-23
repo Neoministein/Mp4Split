@@ -12,8 +12,7 @@ If you want to download the project please see "Project installation guide"
 
 Here is the download link for the newest Version of Mp4Split: [Download](https://drive.google.com/file/d/15OgYNGXUTlzvazoMc8OPjjb61gDEqTV0/view)
 
-For instruction on how to use Mp4Split please see [Video]()
-[*Video comming soon*]
+For instruction on how to use Mp4Split please see [Text instruction](UserInstructions.md) or [Video Tutorial](https://youtu.be/LI3YnAIBl0w)
 
 ### Project installation guide
 
@@ -28,7 +27,7 @@ Both ffmpeg.exe and ffprobe.exe which are used in the project are not uploaded t
 
 #### Installing
 
-To get the project up and running you can either check out the project using an SVN or download the project as a zip file and import it in to your programming  environment of choice as a maven project. 
+To get the project up and running you can either check out the project using an SVN or download the project as a zip file and import it in to your programming  environment of choice as a maven project. After that you'll need to copy Ffmpeg.exe and Ffprobe.exe into the base directory of the project.
 
 ## Deployment
 

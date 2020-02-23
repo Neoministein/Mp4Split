@@ -26,7 +26,7 @@ Sometime NVIDIA does some post processing on the video and it can happen that Mp
 ## TrysToCut
 
 ###### Default : 5
-If you can access the video trysToCut is the amount of time the program will try again to cut it until it gives up.
+If the program can't access the video trysToCut is the amount of times the program will try again to cut it until it gives up.
 
 ## FileLocation:
 
