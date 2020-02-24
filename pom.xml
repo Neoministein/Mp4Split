@@ -6,11 +6,11 @@
 
   <groupId>com.mp4splitmaven</groupId>
   <artifactId>mp4splitmaven</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.5</version>
 
   <name>mp4splitmaven</name>
   <!-- FIXME change it to the project's website -->
-  <url>https://www.youtube.com/channel/UCtfBiBXVXqTotONMq6VSMbg</url>
+  <url>https://github.com/Neoministein/Mp4Split</url>
 
   <dependencies>
     <dependency>
