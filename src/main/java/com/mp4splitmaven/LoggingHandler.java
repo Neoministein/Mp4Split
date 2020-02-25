@@ -1,5 +1,7 @@
 package com.mp4splitmaven;
 
+import com.mp4splitmaven.Screen.ScreenManager;
+
 import java.io.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -18,6 +20,8 @@ public class LoggingHandler {
     public final static int INFO  = 3;
     public final static int DEBUG = 4;
     public final static int KEYPRESS = 5;
+
+    private static ScreenManager screenManager;
 
     private LoggingHandler() {
         logLocation = createDebugFile();
@@ -66,7 +70,7 @@ public class LoggingHandler {
         }
     }
     private static void printToScreen(String text){
-        //TODO Implement SCREEN
+        screenManager.disPlayOnScreen(text);
     }
 
     private String createDebugFile() {
@@ -122,6 +126,11 @@ public class LoggingHandler {
             printNoLog(LoggingHandler.WARN,"There was a problem while writing to the Log");
         }
     }
+    public void setScreenIsEnabled(){
+        screenManager = ScreenManager.getInstace();
+        screenEnabled = true;
+    }
+
     public static void enableScreen(){
         screenEnabled = true;
     }

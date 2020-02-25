@@ -45,6 +45,6 @@ public class Main {
         finalCut.finalCut();
     }
     public void startScreen(){
-
+        loggingHandler.setScreenIsEnabled();
     }
 }

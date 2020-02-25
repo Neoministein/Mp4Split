@@ -38,7 +38,7 @@ public class WhilePlaying implements NativeKeyListener {
 
         try {
             GlobalScreen.registerNativeHook();
-            LoggingHandler.println(LoggingHandler.INFO,"Activated  Keylogger");
+            LoggingHandler.println(LoggingHandler.INFO,"Activated  Macro detection");
         }
         catch (NativeHookException ex) {
             LoggingHandler.println(LoggingHandler.FATAL,"There was a problem starting the Keylogger. \n", ex);
@@ -49,7 +49,7 @@ public class WhilePlaying implements NativeKeyListener {
 
         GlobalScreen.addNativeKeyListener(new WhilePlaying());
     }
-    public void stopKeyLoger() {
+    public void stopKeyLogger() {
         try {
             GlobalScreen.unregisterNativeHook();
         } catch (NativeHookException ex) {
