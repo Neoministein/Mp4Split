@@ -96,4 +96,7 @@ public class TimeStampManager {
 
         return timeFormat;
     }
+    public int getAmountOfStamps(){
+        return timeStampToCut.size();
+    }
 }

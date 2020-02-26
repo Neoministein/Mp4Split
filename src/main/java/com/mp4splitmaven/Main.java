@@ -6,29 +6,33 @@ public class Main {
     Settings settings = Settings.getInstance();
 
     public static void main(String args[]) {
+        Main main = new Main();
         if(args.length != 0) {
-            Main main = new Main();
-            System.out.println(args[0]);
-            switch (args[0]) {
-                case "0":
-                    main.runWhilePlaying();
-                    break;
-                case "1":
-                    main.runFinalCut();
-                    break;
-                case "2":
-                    main.startScreen();
-                    main.runWhilePlaying();
-                    break;
-                case "3":
-                    main.startScreen();
-                    main.runFinalCut();
-                    break;
-                default:
-                    main.runWhilePlaying();
-                    break;
+            if(args.length != 0){
+                System.out.println(args[0]);
+                switch (args[0]) {
+                    case "0":
+                        main.runWhilePlaying();
+                        break;
+                    case "1":
+                        main.runFinalCut();
+                        break;
+                    case "2":
+                        main.startScreen();
+                        main.runWhilePlaying();
+                        break;
+                    case "3":
+                        main.startScreen();
+                        main.runFinalCut();
+                        break;
+                    default:
+                        main.runWhilePlaying();
+                        break;
+                }
             }
         }
+        main.startScreen();
+        main.runWhilePlaying();
     }
 
     public void runWhilePlaying() {

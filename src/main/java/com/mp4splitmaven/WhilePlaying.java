@@ -76,6 +76,7 @@ public class WhilePlaying implements NativeKeyListener {
     public void nativeKeyTyped(NativeKeyEvent e) {}
 
     private void cutVideo() {
+        LoggingHandler.displayIsCutting();
         LoggingHandler.println(LoggingHandler.INFO,"Video stop macro");
         if (timeStampManager != null) {
             try {
@@ -90,12 +91,13 @@ public class WhilePlaying implements NativeKeyListener {
 
             }catch (Exception e) {
                 LoggingHandler.println(LoggingHandler.FATAL, "Video could not be cut: ",e);
-
+                LoggingHandler.displayIsNotCutting();
                 timeStampManager = null;
             }
         }else{
             LoggingHandler.println(LoggingHandler.DEBUG, "Video doesn't need to be cut");
         }
+        LoggingHandler.displayIsNotCutting();
         LoggingHandler.printNoLog(LoggingHandler.INFO,"----------\n");
     }
 
@@ -123,6 +125,7 @@ public class WhilePlaying implements NativeKeyListener {
             timeStampManager = new TimeStampManager();
         }
         timeStampManager.addTimeStampToCut();
+        LoggingHandler.displayNumberOfTimestamps(timeStampManager.getAmountOfStamps());
         LoggingHandler.println(LoggingHandler.INFO,"Timestamp has been set");
     }
 

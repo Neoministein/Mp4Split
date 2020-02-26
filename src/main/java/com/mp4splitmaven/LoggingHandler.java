@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 
 public class LoggingHandler {
 
-
     private static String stringToLog = "";
     private static int debugLevel = 10;
     private static String logLocation;
@@ -70,7 +69,7 @@ public class LoggingHandler {
         }
     }
     private static void printToScreen(String text){
-        screenManager.disPlayOnScreen(text);
+        screenManager.displayToLog(text);
     }
 
     private String createDebugFile() {
@@ -130,15 +129,15 @@ public class LoggingHandler {
         screenManager = ScreenManager.getInstace();
         screenEnabled = true;
     }
-
-    public static void enableScreen(){
-        screenEnabled = true;
+    public static void displayIsCutting(){
+        screenManager.displayCurrently(screenManager.IS_CUTTING);
     }
-    public static boolean isScreenEnabled(){
-        return screenEnabled;
+    public static void displayIsNotCutting(){
+        displayNumberOfTimestamps(0);
+        screenManager.displayCurrently(screenManager.IS_NOTCUTTING);
     }
-
-
-
+    public static void displayNumberOfTimestamps(int number){
+        screenManager.displayNumberOfTimestamp(number);
+    }
 
 }
