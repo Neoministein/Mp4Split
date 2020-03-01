@@ -12,9 +12,6 @@ public class FinalCut {
 
     FfmpegManager ffmpegManager = new FfmpegManager();
     Settings settings = Settings.getInstance();
-    String location = "finalCut";
-
-
 
     public FinalCut() {
 
@@ -24,19 +21,16 @@ public class FinalCut {
             try {
 
                 String[] filesToCut = getNameToCut();
-                String ffmpegLocation = settings.getFfmpegLocation();
+                String ffmpegLocation = Settings.FFMPEG_LOCATION;
 
                 for(String files: filesToCut) {
                     String fileLocation = findFile(getOriginalFileName(files),new File (settings.getInputLocationt()));
-                    String[] startTime = {getStartTimeFromName(files)};
-                    Long[] clipLength = {settings.getClipLength()*1000l};
-                    String[] videoLength = new TimeStampManager().formatTime(clipLength);
+                    String startTime = getStartTimeFromName(files);
+                    Long clipLength = settings.getClipLength()*1000l;
+                    String videoLength = new TimeStampManager().formatTime(clipLength);
 
                     ffmpegManager.cutVideoExact(ffmpegLocation,fileLocation,startTime,videoLength);
                 }
-
-
-
 
             }catch (Exception e){
                 LoggingHandler.println(LoggingHandler.FATAL,"There was a problem trying to cut the video exact", e);
@@ -47,7 +41,7 @@ public class FinalCut {
     public String[] getNameToCut(){
         ArrayList<String> names = new ArrayList<String >();
         try {
-            File folder = new File(System.getProperty("user.dir") + "\\" + location);
+            File folder = new File(Settings.FINALCUT_LOCATION);
             File[] listOfFiles = folder.listFiles();
 
             for(File file: listOfFiles){

@@ -29,27 +29,25 @@ public class FfmpegManager {
             execCmd(cmdComand);
         }
     }
-    public void cutVideoExact(String ffmpegLocation, String inputFileLocation,String[] startTime, String[] videoLength) {
+    public void cutVideoExact(String ffmpegLocation, String inputFileLocation,String startTime, String videoLength) {
         LoggingHandler.println(LoggingHandler.INFO,"Starting to cut Video");
 
         String saveFileLocation = inputFileLocation.substring(0,inputFileLocation.lastIndexOf("."))+"_clip_";
 
-        for(int i = 0; i < startTime.length; i++) {
-            String cmdComand = ("\"" + ffmpegLocation + "\"" +
-                    " -i " +
-                    "\"" + inputFileLocation + "\"" +
-                    " -ss " +
-                    startTime[i] +
-                    " -t " +
-                    videoLength[i] +
-                    " -async 1 " +
-                    "\"" + saveFileLocation +
-                    startTime[i].replace(":",".")
-                    +".mp4" +"\"");
-            LoggingHandler.println(LoggingHandler.DEBUG,"FFmpeg Comand: [" +cmdComand+ "]");
+        String cmdComand = ("\"" + ffmpegLocation + "\"" +
+                " -i " +
+                "\"" + inputFileLocation + "\"" +
+                " -ss " +
+                startTime +
+                " -t " +
+                videoLength +
+                " -async 1 " +
+                "\"" + saveFileLocation +
+                startTime.replace(":",".")
+                +".mp4" +"\"");
+        LoggingHandler.println(LoggingHandler.DEBUG,"FFmpeg Comand: [" +cmdComand+ "]");
 
-            execCmd(cmdComand);
-        }
+        execCmd(cmdComand);
     }
 
     public int getVideoLength(String ffprobLocation, String videoLocation) throws Exception {

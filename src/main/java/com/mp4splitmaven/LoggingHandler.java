@@ -74,7 +74,7 @@ public class LoggingHandler {
 
     private String createDebugFile() {
 
-        String logFileLocation = System.getProperty("user.dir") +"\\logs\\"+
+        String logFileLocation = Settings.LOG_LOCATION +"\\"+
                 (new SimpleDateFormat("yyyy.MM.dd - HH.mm.ss").format(
                         new Timestamp(System.currentTimeMillis())) +
                 ".txt").replace(":",".");

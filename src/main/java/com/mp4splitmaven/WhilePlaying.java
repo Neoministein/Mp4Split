@@ -61,7 +61,7 @@ public class WhilePlaying implements NativeKeyListener {
         LoggingHandler.printNoLog(LoggingHandler.KEYPRESS,"Key Pressed [" + NativeKeyEvent.getKeyText(e.getKeyCode())+"]\n");
 
         if(checkForDoubleKeyCode(lastKeyCode,e.getKeyCode(),clipPressOne,clipPressTwo)) {
-            doTimeStamp();
+            createNewTimeStamp();
         }
 
         if(checkForDoubleKeyCode(lastKeyCode,e.getKeyCode(),stopPressOne,stopPressTwo)) {
@@ -108,8 +108,8 @@ public class WhilePlaying implements NativeKeyListener {
                 String inputFileLocation = InputFileManager.lastFileModified(settings.getInputLocationt());
 
                 FfmpegManager f = new FfmpegManager();
-                timeStampManager.prepareTimeStamp(f.getVideoLength(settings.getFfprobeLocation(), inputFileLocation));
-                f.cutVideo(settings.getFfmpegLocation(), inputFileLocation, timeStampManager.getCutStartTimeStamp(), timeStampManager.getclipLengthToCut());
+                timeStampManager.prepareTimeStamp(f.getVideoLength(Settings.FFPROBE_LOCATION, inputFileLocation));
+                f.cutVideo(Settings.FFMPEG_LOCATION, inputFileLocation, timeStampManager.getCutStartTimeStamp(), timeStampManager.getclipLengthToCut());
                 timeStampManager = null;
                 return true;
             }catch (Exception e){
@@ -120,11 +120,11 @@ public class WhilePlaying implements NativeKeyListener {
         return false;
     }
 
-    private void doTimeStamp() {
+    private void createNewTimeStamp() {
         if (timeStampManager == null) {
             timeStampManager = new TimeStampManager();
         }
-        timeStampManager.addTimeStampToCut();
+        timeStampManager.addNewTimeStamp();
         LoggingHandler.displayNumberOfTimestamps(timeStampManager.getAmountOfStamps());
         LoggingHandler.println(LoggingHandler.INFO,"Timestamp has been set");
     }

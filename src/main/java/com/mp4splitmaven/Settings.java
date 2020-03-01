@@ -4,9 +4,12 @@ import com.mp4splitmaven.HelperClass.FileManager;
 
 public class Settings {
 
-    private String settingsLocation = "settings.txt";
-    private String ffmpegLocation = System.getProperty("user.dir")+"\\ffmpeg.exe";
-    private String ffprobeLocation = System.getProperty("user.dir")+"\\ffprobe.exe";
+    private static final String SETTINGS_LOCATION = "settings.txt";
+    public static final String FFMPEG_LOCATION = System.getProperty("user.dir")+"\\ffmpeg.exe";
+    public static final String FFPROBE_LOCATION = System.getProperty("user.dir")+"\\ffprobe.exe";
+
+    public static final String LOG_LOCATION = System.getProperty("user.dir")+"\\logs";
+    public static final String FINALCUT_LOCATION = System.getProperty("user.dir")+"\\finalCut";
 
     private int debuglevel;
 
@@ -33,15 +36,15 @@ public class Settings {
 
     public void loadSettings() {
         System.out.println("Load settings");
-        debuglevel = FileManager.readLineToInt(settingsLocation,3);
-        clipLength = FileManager.readLineToInt(settingsLocation,4);
-        secondsUntilCut = FileManager.readLineToInt(settingsLocation,5);
-        trysToCut = FileManager.readLineToInt(settingsLocation,6);
-        inputLocation = FileManager.readLineToSting(settingsLocation,7);
-        clipPressOne = FileManager.readLineToInt(settingsLocation,8);
-        clipPressTwo = FileManager.readLineToInt(settingsLocation,9);
-        stopPressOne = FileManager.readLineToInt(settingsLocation,10);
-        stopPressTwo = FileManager.readLineToInt(settingsLocation,11);
+        debuglevel = FileManager.readLineToInt(SETTINGS_LOCATION,3);
+        clipLength = FileManager.readLineToInt(SETTINGS_LOCATION,4);
+        secondsUntilCut = FileManager.readLineToInt(SETTINGS_LOCATION,5);
+        trysToCut = FileManager.readLineToInt(SETTINGS_LOCATION,6);
+        inputLocation = FileManager.readLineToSting(SETTINGS_LOCATION,7);
+        clipPressOne = FileManager.readLineToInt(SETTINGS_LOCATION,8);
+        clipPressTwo = FileManager.readLineToInt(SETTINGS_LOCATION,9);
+        stopPressOne = FileManager.readLineToInt(SETTINGS_LOCATION,10);
+        stopPressTwo = FileManager.readLineToInt(SETTINGS_LOCATION,11);
     }
 
     public int getDebuglevel() {
@@ -56,10 +59,6 @@ public class Settings {
     public int getTrysToCut() {
         return trysToCut;
     }
-    public String getFfmpegLocation() {
-        return ffmpegLocation;
-    }
-    public String getFfprobeLocation() {return  ffprobeLocation;}
     public String getInputLocationt() {
         return inputLocation;
     }
