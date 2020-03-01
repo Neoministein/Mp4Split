@@ -109,4 +109,29 @@ public class TimeStampManagerTest {
         assertArrayEquals(expectedClipLength,resultClipLength);
         assertArrayEquals(expectedStartTime,resultStartTime);
     }
+
+    @Test
+    public void prepareTimeStampToShort() {
+        //Arrange
+        TimeStampManager timeStampManager = new TimeStampManager();
+        int videoLengthInSeconds = 900;
+
+        Long currentTime = new Date().getTime();
+        Long cutTimes = currentTime-((MINUTE*14)+(50*SECOND));
+
+        String[] expectedStartTime = {"00:00:00"};
+        String[] expectedClipLength = {"00:00:10"};
+        //Act
+        timeStampManager.addNewTimeStampMock(cutTimes);
+
+        timeStampManager.clipHasEnded();
+
+        timeStampManager.prepareTimeStamp(videoLengthInSeconds);
+
+        String[] resultStartTime = timeStampManager.getCutStartTimeStamp();
+        String[] resultClipLength = timeStampManager.getclipLengthToCut();
+        //Assert
+        assertArrayEquals(expectedClipLength,resultClipLength);
+        assertArrayEquals(expectedStartTime,resultStartTime);
+    }
 }
