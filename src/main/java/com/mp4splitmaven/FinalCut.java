@@ -1,8 +1,8 @@
 package com.mp4splitmaven;
 
 
-import com.mp4splitmaven.HelperClass.FfmpegManager;
-import com.mp4splitmaven.HelperClass.TimeStampManager;
+import com.mp4splitmaven.helperclass.FfmpegManager;
+import com.mp4splitmaven.helperclass.TimeStampManager;
 
 import java.io.File;
 import java.util.ArrayList;

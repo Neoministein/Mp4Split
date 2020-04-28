@@ -1,8 +1,8 @@
 package com.mp4splitmaven;
 
-import com.mp4splitmaven.HelperClass.FfmpegManager;
-import com.mp4splitmaven.HelperClass.InputFileManager;
-import com.mp4splitmaven.HelperClass.TimeStampManager;
+import com.mp4splitmaven.helperclass.FfmpegManager;
+import com.mp4splitmaven.helperclass.InputFileManager;
+import com.mp4splitmaven.helperclass.TimeStampManager;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
@@ -38,7 +38,7 @@ public class WhilePlaying implements NativeKeyListener {
 
         try {
             GlobalScreen.registerNativeHook();
-            LoggingHandler.println(LoggingHandler.INFO,"Activated  Macro detection");
+            LoggingHandler.println(LoggingHandler.INFO,"Activated Macro detection");
         }
         catch (NativeHookException ex) {
             LoggingHandler.println(LoggingHandler.FATAL,"There was a problem starting the Keylogger. \n", ex);
@@ -58,7 +58,7 @@ public class WhilePlaying implements NativeKeyListener {
     }
 
     public void nativeKeyPressed(NativeKeyEvent e) {
-        LoggingHandler.printNoLog(LoggingHandler.KEYPRESS,"Key Pressed [" + NativeKeyEvent.getKeyText(e.getKeyCode())+"]\n");
+        LoggingHandler.printlnNoIO(LoggingHandler.KEYPRESS,"Key Pressed [" + NativeKeyEvent.getKeyText(e.getKeyCode())+"]\n");
 
         if(checkForDoubleKeyCode(lastKeyCode,e.getKeyCode(),clipPressOne,clipPressTwo)) {
             createNewTimeStamp();
@@ -76,7 +76,6 @@ public class WhilePlaying implements NativeKeyListener {
     public void nativeKeyTyped(NativeKeyEvent e) {}
 
     private void cutVideo() {
-        LoggingHandler.displayIsCutting();
         LoggingHandler.println(LoggingHandler.INFO,"Video stop macro");
         if (timeStampManager != null) {
             try {
@@ -91,14 +90,16 @@ public class WhilePlaying implements NativeKeyListener {
 
             }catch (Exception e) {
                 LoggingHandler.println(LoggingHandler.FATAL, "Video could not be cut: ",e);
-                LoggingHandler.displayIsNotCutting();
+                //TODO REIMPLEMENT THIS
+                //LoggingHandler.displayIsNotCutting();
                 timeStampManager = null;
             }
         }else{
             LoggingHandler.println(LoggingHandler.DEBUG, "Video doesn't need to be cut");
         }
-        LoggingHandler.displayIsNotCutting();
-        LoggingHandler.printNoLog(LoggingHandler.INFO,"----------\n");
+        //TODO REIMPLEMENT THIS
+        //LoggingHandler.displayIsNotCutting();
+        LoggingHandler.printlnNoIO(LoggingHandler.INFO,"----------");
     }
 
     private boolean hasCutWithoutError(){
@@ -125,7 +126,8 @@ public class WhilePlaying implements NativeKeyListener {
             timeStampManager = new TimeStampManager();
         }
         timeStampManager.addNewTimeStamp();
-        LoggingHandler.displayNumberOfTimestamps(timeStampManager.getAmountOfStamps());
+        //TODO REIMPLEMENT THIS
+        //LoggingHandler.displayNumberOfTimestamps(timeStampManager.getAmountOfStamps());
         LoggingHandler.println(LoggingHandler.INFO,"Timestamp has been set");
     }
 

@@ -1,4 +1,4 @@
-package com.mp4splitmaven.Screen;
+package com.mp4splitmaven.screen;
 
 import java.awt.Component;
 import java.awt.event.*;

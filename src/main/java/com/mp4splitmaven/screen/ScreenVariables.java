@@ -1,4 +1,4 @@
-package com.mp4splitmaven.Screen;
+package com.mp4splitmaven.screen;
 
 import com.mp4splitmaven.FinalCut;
 import com.mp4splitmaven.LoggingHandler;

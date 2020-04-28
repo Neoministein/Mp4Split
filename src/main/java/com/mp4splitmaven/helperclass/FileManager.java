@@ -1,4 +1,4 @@
-package com.mp4splitmaven.HelperClass;
+package com.mp4splitmaven.helperclass;
 
 import com.mp4splitmaven.LoggingHandler;
 
@@ -63,4 +63,23 @@ public class FileManager {
             return false;
         }
     }
+
+    public static void writeToFile(String location, String fileContent) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(location,true));
+            writer.write(fileContent);
+            writer.close();
+        }catch (IOException ex) {
+            LoggingHandler.printlnNoIO(LoggingHandler.ERROR,"There was problem trying to write toa a file at ["+location+"]",ex);
+        }
+    }
+    public static void createFile(String location){
+        try {
+            new File(location).createNewFile();
+
+        } catch (IOException ex) {
+            LoggingHandler.printlnNoIO(LoggingHandler.FATAL,"There is a problem creating a the File at Path ["+location+"]",ex);
+        }
+    }
+
 }

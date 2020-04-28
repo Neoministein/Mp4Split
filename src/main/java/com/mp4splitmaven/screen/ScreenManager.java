@@ -1,4 +1,4 @@
-package com.mp4splitmaven.Screen;
+package com.mp4splitmaven.screen;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

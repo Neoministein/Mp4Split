@@ -1,4 +1,4 @@
-package com.mp4splitmaven.HelperClass;
+package com.mp4splitmaven.helperclass;
 
 import com.mp4splitmaven.LoggingHandler;
 

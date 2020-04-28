@@ -1,6 +1,6 @@
 package com.mp4splitmaven;
 
-import com.mp4splitmaven.HelperClass.FileManager;
+import com.mp4splitmaven.helperclass.FileManager;
 
 public class Settings {
 

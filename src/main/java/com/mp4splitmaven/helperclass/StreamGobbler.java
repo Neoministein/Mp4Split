@@ -1,4 +1,4 @@
-package com.mp4splitmaven.HelperClass;
+package com.mp4splitmaven.helperclass;
 
 import com.mp4splitmaven.LoggingHandler;
 
@@ -16,10 +16,11 @@ class StreamGobbler implements Runnable {
     }
 
     public void run() {
+        LoggingHandler.println(LoggingHandler.DEBUG,"Console output:");
         try {
             int c;
             while ((c = is.read()) != -1)
-                LoggingHandler.printNoLog(LoggingHandler.DEBUG, (char) c + "");
+                LoggingHandler.printNoIO(LoggingHandler.DEBUG, (char) c + "");
         } catch (IOException e) {
             LoggingHandler.println(LoggingHandler.WARN,"There was a problem trying to manage the OutputStream", e);
         }

@@ -1,17 +1,16 @@
 package com.mp4splitmaven;
 
-import com.mp4splitmaven.Screen.ScreenManager;
+import com.mp4splitmaven.logging.LogfileLogger;
+import com.mp4splitmaven.logging.Logger;
 
-import java.io.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoggingHandler {
 
     private static String stringToLog = "";
-    private static int debugLevel = 10;
-    private static String logLocation;
-    private static boolean screenEnabled = false;
 
     public final static int FATAL = 0;
     public final static int ERROR = 1;
@@ -20,18 +19,13 @@ public class LoggingHandler {
     public final static int DEBUG = 4;
     public final static int KEYPRESS = 5;
 
-    private static ScreenManager screenManager;
+    private static LoggingHandler instance = new LoggingHandler();
+    private static List<Logger> loggers;
 
     private LoggingHandler() {
-        logLocation = createDebugFile();
-
-        println(LoggingHandler.INFO,"new Logfile at ["+logLocation+"]");
+        loggers = new ArrayList<>();
+        addLogger(new LogfileLogger());
     }
-
-    public void setDebugLevel() {
-        debugLevel = Settings.getInstance().getDebuglevel();
-    }
-    private static LoggingHandler instance = new LoggingHandler();
     public static LoggingHandler getInstance() {
         return  instance;
     }
@@ -41,53 +35,63 @@ public class LoggingHandler {
         print(loggingLevel,text+"\n");
     }
 
-    public static void println(int loggingLevel, String text, Exception exeption){
-        text += ("\n"+exeption.getStackTrace()[0].getClassName()+": "+exeption.getMessage());
-        for(StackTraceElement stackTrace: exeption.getStackTrace()) {
-
-            text +=("\n"+"at "+stackTrace.getClassName()+
-                    "."+stackTrace.getMethodName()+
-                    "("+stackTrace.getMethodName()+
-                    "."+stackTrace.getLineNumber()+")");
-
-        }
-        print(loggingLevel,text+"\n");
+    public static void println(int loggingLevel, String text, Exception exception){
+        print(loggingLevel,text+getStackTrace(exception)+"\n");
     }
 
     public static void print(int loggingLevel,String text){
-        printNoLog(loggingLevel,debugLevelToString(loggingLevel)+text);
-        checkPrintToLog(loggingLevel,text);
+        if(hasNewLine(text)){
+            log(loggingLevel);
+            resetLoggingText();
+        }
     }
 
-    public static void printNoLog(int loggingLevel,String text) {
-        if (loggingLevel <= debugLevel){
-            if(screenEnabled){
-                printToScreen(text);
-            }else {
-                System.out.print(text);
+    public static void printlnNoIO(int loggingLevel, String text) {printNoIO(loggingLevel,text+"\n");}
+
+    public static void printlnNoIO(int loggingLevel, String text, Exception exception){
+        printNoIO(loggingLevel,text+getStackTrace(exception)+"\n");
+    }
+
+    public static void printNoIO(int loggingLevel,String text){
+        for(Logger logger : loggers){
+            if(!logger.isIOLogger()) {
+                if (loggingLevel <= logger.getLoglevel()) {
+                    logger.print(text);
+                }
             }
         }
     }
-    private static void printToScreen(String text){
-        screenManager.displayToLog(text);
-    }
 
-    private String createDebugFile() {
-
-        String logFileLocation = Settings.LOG_LOCATION +"\\"+
-                (new SimpleDateFormat("yyyy.MM.dd - HH.mm.ss").format(
-                        new Timestamp(System.currentTimeMillis())) +
-                ".txt").replace(":",".");
-        try {
-            new File(logFileLocation).createNewFile();
-
-        } catch (IOException e) {
-            printNoLog(LoggingHandler.FATAL,"There is a problem creating a Logfile: " + e.getMessage());
+    private static boolean hasNewLine(String textToPrint) {
+        stringToLog += textToPrint;
+        if(stringToLog.contains("\n") || stringToLog.contains("\r")){
+            return true;
+        }else {
+            return false;
         }
-        
-        return logFileLocation;
-
     }
+
+    private static void resetLoggingText(){
+        stringToLog = "";
+    }
+
+    private static void log(int loggingLevel){
+        String textToPrint = generatePreText(loggingLevel);
+
+        for (Logger logger : loggers){
+            if (loggingLevel <= logger.getLoglevel()){
+                logger.print(textToPrint);
+            }
+        }
+    }
+
+    private static String generatePreText(int loggingLevel){
+        return "["+new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(
+                new Timestamp(System.currentTimeMillis()))+"]" +
+                debugLevelToString(loggingLevel)+
+                stringToLog;
+    }
+
     private static String debugLevelToString(int debugLevel){
         switch (debugLevel){
             case FATAL:
@@ -100,44 +104,32 @@ public class LoggingHandler {
                 return "[INFO]";
             case DEBUG:
                 return "[DEBUG]";
+            case KEYPRESS  :
+                return "[KEYPRESS]";
             default:
                 return "[?????]";
         }
     }
 
-    private static void checkPrintToLog(int loggingLevel, String textToPrint) {
-        stringToLog += textToPrint;
-        if(stringToLog.contains("\n") || stringToLog.contains("\r")){
-            stringToLog = debugLevelToString(loggingLevel) + stringToLog;
-            printToLog();
+    public static void addLogger(Logger logger){
+        loggers.add(logger);
+        println(LoggingHandler.DEBUG,"new Log location at ["+logger.getLoglocation()+"]");
+    }
 
-            stringToLog = "";
+    public static void clearLogger(){
+        loggers.clear();
+    }
+
+    private static String getStackTrace(Exception exception){
+        String stackTrace = ("\n"+exception.getStackTrace()[0].getClassName()+": "+exception.getMessage());
+        for(StackTraceElement stackTraceElement: exception.getStackTrace()) {
+
+            stackTrace +=("\n"+"at "+stackTraceElement.getClassName()+
+                    "."+stackTraceElement.getMethodName()+
+                    "("+stackTraceElement.getMethodName()+
+                    "."+stackTraceElement.getLineNumber()+")");
+
         }
+        return stackTrace;
     }
-    private static void printToLog() {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(logLocation,true));
-            writer.write("["+new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(
-                            new Timestamp(System.currentTimeMillis()))+"]" + stringToLog);
-            writer.close();
-
-        } catch (IOException e) {
-            printNoLog(LoggingHandler.WARN,"There was a problem while writing to the Log");
-        }
-    }
-    public void setScreenIsEnabled(){
-        screenManager = ScreenManager.getInstace();
-        screenEnabled = true;
-    }
-    public static void displayIsCutting(){
-        screenManager.displayCurrently(screenManager.IS_CUTTING);
-    }
-    public static void displayIsNotCutting(){
-        displayNumberOfTimestamps(0);
-        screenManager.displayCurrently(screenManager.IS_NOTCUTTING);
-    }
-    public static void displayNumberOfTimestamps(int number){
-        screenManager.displayNumberOfTimestamp(number);
-    }
-
 }

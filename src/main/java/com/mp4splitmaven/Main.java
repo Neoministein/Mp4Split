@@ -1,5 +1,10 @@
 package com.mp4splitmaven;
 
+import com.mp4splitmaven.logging.ConsoleLogger;
+import com.mp4splitmaven.logging.LogfileLogger;
+import com.mp4splitmaven.logging.ScreenLogger;
+import com.mp4splitmaven.screen.ScreenManager;
+
 public class Main {
 
     LoggingHandler loggingHandler =  LoggingHandler.getInstance();
@@ -8,27 +13,25 @@ public class Main {
     public static void main(String args[]) {
         Main main = new Main();
         if(args.length != 0) {
-            if(args.length != 0){
-                System.out.println(args[0]);
-                switch (args[0]) {
-                    case "0":
-                        main.runWhilePlaying();
-                        break;
-                    case "1":
-                        main.runFinalCut();
-                        break;
-                    case "2":
-                        main.startScreen();
-                        main.runWhilePlaying();
-                        break;
-                    case "3":
-                        main.startScreen();
-                        main.runFinalCut();
-                        break;
-                    default:
-                        main.runWhilePlaying();
-                        break;
-                }
+            System.out.println(args[0]);
+            switch (args[0]) {
+                case "0":
+                    main.runWhilePlaying();
+                    break;
+                case "1":
+                    main.runFinalCut();
+                    break;
+                case "2":
+                    main.startScreen();
+                    main.runWhilePlaying();
+                    break;
+                case "3":
+                    main.startScreen();
+                    main.runFinalCut();
+                    break;
+                default:
+                    main.runWhilePlaying();
+                    break;
             }
         }
         main.startScreen();
@@ -36,12 +39,10 @@ public class Main {
     }
 
     public void runWhilePlaying() {
-
-        loggingHandler.setDebugLevel();
+        LoggingHandler.addLogger(new ConsoleLogger(settings.getDebuglevel()));
 
         WhilePlaying whilePlaying = new WhilePlaying();
         whilePlaying.startKeyLogger();
-
     }
     public void runFinalCut() {
         FinalCut finalCut = new FinalCut();
@@ -49,6 +50,6 @@ public class Main {
         finalCut.finalCut();
     }
     public void startScreen(){
-        loggingHandler.setScreenIsEnabled();
+        LoggingHandler.addLogger(new ScreenLogger( settings.getDebuglevel() ,ScreenManager.getInstace()));
     }
 }
