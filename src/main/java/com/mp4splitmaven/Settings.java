@@ -8,7 +8,6 @@ public class Settings {
     public static final String FFMPEG_LOCATION = System.getProperty("user.dir")+"\\ffmpeg.exe";
     public static final String FFPROBE_LOCATION = System.getProperty("user.dir")+"\\ffprobe.exe";
 
-    public static final String LOG_LOCATION = System.getProperty("user.dir")+"\\logs";
     public static final String FINALCUT_LOCATION = System.getProperty("user.dir")+"\\finalCut";
 
     private int debuglevel;

@@ -1,14 +1,16 @@
 package com.mp4splitmaven.helperclass;
 
-import com.mp4splitmaven.LoggingHandler;
+import com.mp4splitmaven.logging.Multilogger;
+import com.mp4splitmaven.logging.Logging;
 
 import java.io.IOException;
 
 public class FfmpegManager {
 
+    private Logging loggingHandler = Multilogger.getInstance();
 
     public void cutVideo(String ffmpegLocation, String inputFileLocation,String[] startTime, String[] videoLength) {
-        LoggingHandler.println(LoggingHandler.INFO,"Starting to cut Video");
+        loggingHandler.println(Multilogger.INFO,"Starting to cut Video");
 
         String saveFileLocation = inputFileLocation.substring(0,inputFileLocation.lastIndexOf("."))+"_clip_";
 
@@ -24,13 +26,13 @@ public class FfmpegManager {
                     "\"" + saveFileLocation +
                     startTime[i].replace(":",".")
                     +".mp4" +"\"");
-            LoggingHandler.println(LoggingHandler.DEBUG,"FFmpeg Comand: [" +cmdComand+ "]");
+            loggingHandler.println(Multilogger.DEBUG,"FFmpeg Comand: [" +cmdComand+ "]");
 
             execCmd(cmdComand);
         }
     }
     public void cutVideoExact(String ffmpegLocation, String inputFileLocation,String startTime, String videoLength) {
-        LoggingHandler.println(LoggingHandler.INFO,"Starting to cut Video");
+        loggingHandler.println(Multilogger.INFO,"Starting to cut Video");
 
         String saveFileLocation = inputFileLocation.substring(0,inputFileLocation.lastIndexOf("."))+"_clip_";
 
@@ -45,13 +47,13 @@ public class FfmpegManager {
                 "\"" + saveFileLocation +
                 startTime.replace(":",".")
                 +".mp4" +"\"");
-        LoggingHandler.println(LoggingHandler.DEBUG,"FFmpeg Comand: [" +cmdComand+ "]");
+        loggingHandler.println(Multilogger.DEBUG,"FFmpeg Comand: [" +cmdComand+ "]");
 
         execCmd(cmdComand);
     }
 
     public int getVideoLength(String ffprobLocation, String videoLocation) throws Exception {
-        LoggingHandler.println(LoggingHandler.INFO,"Determining Video Length");
+        loggingHandler.println(Multilogger.INFO,"Determining Video Length");
 
         int videoLength = 0;
         String strVideoLength = "";
@@ -59,18 +61,18 @@ public class FfmpegManager {
                 " -v error -show_entries format=duration " +
                 "\"" + videoLocation + "\"" +
                 " -of default=noprint_wrappers=1:nokey=1";
-        LoggingHandler.println(LoggingHandler.DEBUG,"Ffprobe command: ["+cmdComand+"]");
+        loggingHandler.println(Multilogger.DEBUG,"Ffprobe command: ["+cmdComand+"]");
 
 
         try {
             strVideoLength = execCmdwithOutput(cmdComand);
             videoLength = Integer.parseInt(strVideoLength.substring(0,strVideoLength.indexOf(".")));
         } catch (IOException e) {
-            LoggingHandler.println(LoggingHandler.ERROR,"There was a problem while getting the length from ffprobe", e);
+            loggingHandler.println(Multilogger.ERROR,"There was a problem while getting the length from ffprobe", e);
             throw new Exception();
         }
 
-        LoggingHandler.println(LoggingHandler.DEBUG,"Video Length ["+ videoLength + "]");
+        loggingHandler.println(Multilogger.DEBUG,"Video Length ["+ videoLength + "]");
         return videoLength;
 
     }
@@ -101,9 +103,9 @@ public class FfmpegManager {
             errorGobbler.join();   // Handle condition where the
             outputGobbler.join();  // process ends before the threads finish
         } catch (InterruptedException e) {
-            LoggingHandler.println(LoggingHandler.WARN,"There was a problem trying to run an Command",e);
+            loggingHandler.println(Multilogger.WARN,"There was a problem trying to run an Command",e);
         } catch (IOException e) {
-            LoggingHandler.println(LoggingHandler.WARN,"There was a problem trying to run an Command",e);
+            loggingHandler.println(Multilogger.WARN,"There was a problem trying to run an Command",e);
         }
 
 

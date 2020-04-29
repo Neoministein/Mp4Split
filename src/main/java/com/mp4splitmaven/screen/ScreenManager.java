@@ -34,7 +34,6 @@ public class ScreenManager extends ScreenVariables {
 
         frame.getContentPane().add(cards);
         frame.setJMenuBar(menuBar);
-        frame.setVisible(true);
     }
     private JPanel getMainPanel(){
         JPanel jPanel = new JPanel(new GridBagLayout());
@@ -160,15 +159,19 @@ public class ScreenManager extends ScreenVariables {
         return menuBar;
     }
 
-    public static void displayToLog(String text){
+    public void displayToLog(String text){
         logTextArea.append(text);
     }
+    public void setScreenVisible(boolean state){
+        frame.setVisible(state);
+    }
 
-    public static void displayNumberOfTimestamp(int number){
+
+    public void displayNumberOfTimestamp(int number){
         numberOfTimestampsAns.setText(number+"");
     }
-    public static void displayCurrently(int number){
-        if(number == 1){
+    public void isCurrentlyCutting(boolean state){
+        if(state){
             currentlyAns.setText(UI_LABEL_CURRENTLY_CUTTING);
         }else {
             currentlyAns.setText(UI_LABEL_CURRENTLY_NOTCUTTING);

@@ -1,8 +1,8 @@
-package com.mp4splitmaven.logging;
+package com.mp4splitmaven.logging.logger;
 
 public class ConsoleLogger implements Logger {
 
-    int loglevel;
+    private final int loglevel;
 
     public ConsoleLogger(int loglevel){
         this.loglevel = loglevel;
@@ -15,7 +15,7 @@ public class ConsoleLogger implements Logger {
 
     @Override
     public int getLoglevel() {
-        return 0;
+        return loglevel;
     }
 
     @Override

@@ -1,12 +1,15 @@
 package com.mp4splitmaven.helperclass;
 
-import com.mp4splitmaven.LoggingHandler;
+import com.mp4splitmaven.logging.Multilogger;
+import com.mp4splitmaven.logging.Logging;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileManager {
+
+    private static Logging loggingHandler = Multilogger.getInstance();
 
     public static String[] readFile (String location) {
         try {
@@ -23,7 +26,7 @@ public class FileManager {
 
             return lines.toArray(new String[lines.size()]);
         }catch (IOException ex) {
-            LoggingHandler.println(LoggingHandler.ERROR,"There was a problem trying to read the file at ["+ location +"]");
+            loggingHandler.println(Multilogger.ERROR,"There was a problem trying to read the file at ["+ location +"]");
             return null;
         }
     }
@@ -32,10 +35,10 @@ public class FileManager {
         try {
             String l = readFile(location)[line];
             String value = l.substring(l.indexOf(":")+1);
-            LoggingHandler.println(LoggingHandler.DEBUG,"Line ["+ line +"] contains ["+ value +"]");
+            loggingHandler.println(Multilogger.DEBUG,"Line ["+ line +"] contains ["+ value +"]");
             return value;
         }catch (Exception ex) {
-            LoggingHandler.println(LoggingHandler.WARN,"There was a wrong value found on line ["+ line +"] in file ["+ location+"]");
+            loggingHandler.println(Multilogger.WARN,"There was a wrong value found on line ["+ line +"] in file ["+ location+"]");
             return "";
         }
     }
@@ -44,10 +47,10 @@ public class FileManager {
         String l = readFile(location)[line];
         try {
             int value = Integer.parseInt(l.substring(l.indexOf(":")+1));
-            LoggingHandler.println(LoggingHandler.DEBUG,"Line ["+ line +"] contains ["+ value+"]");
+            loggingHandler.println(Multilogger.DEBUG,"Line ["+ line +"] contains ["+ value+"]");
             return value;
         }catch (Exception ex) {
-            LoggingHandler.println(LoggingHandler.WARN,"There was a wrong value found on line ["+ line +"] in file ["+ location+"]");
+            loggingHandler.println(Multilogger.WARN,"There was a wrong value found on line ["+ line +"] in file ["+ location+"]");
             return 0;
         }
     }
@@ -56,10 +59,10 @@ public class FileManager {
         String l = readFile(location)[line];
         try {
             boolean value = Boolean.parseBoolean(l.replaceAll(" ","").substring((l.replaceAll(" ","").indexOf(":")+1)));
-            LoggingHandler.println(LoggingHandler.DEBUG,"Line ["+ line +"] contains ["+ value +"]");
+            loggingHandler.println(Multilogger.DEBUG,"Line ["+ line +"] contains ["+ value +"]");
             return value;
         }catch (Exception ex) {
-            LoggingHandler.println(LoggingHandler.WARN,"There was a wrong value found on line ["+ line +"] in file ["+ location+"]");
+            loggingHandler.println(Multilogger.WARN,"There was a wrong value found on line ["+ line +"] in file ["+ location+"]");
             return false;
         }
     }
@@ -70,7 +73,7 @@ public class FileManager {
             writer.write(fileContent);
             writer.close();
         }catch (IOException ex) {
-            LoggingHandler.printlnNoIO(LoggingHandler.ERROR,"There was problem trying to write toa a file at ["+location+"]",ex);
+            loggingHandler.printlnNoIO(Multilogger.ERROR,"There was problem trying to write toa a file at ["+location+"]",ex);
         }
     }
     public static void createFile(String location){
@@ -78,7 +81,7 @@ public class FileManager {
             new File(location).createNewFile();
 
         } catch (IOException ex) {
-            LoggingHandler.printlnNoIO(LoggingHandler.FATAL,"There is a problem creating a the File at Path ["+location+"]",ex);
+            loggingHandler.printlnNoIO(Multilogger.FATAL,"There is a problem creating a the File at Path ["+location+"]",ex);
         }
     }
 

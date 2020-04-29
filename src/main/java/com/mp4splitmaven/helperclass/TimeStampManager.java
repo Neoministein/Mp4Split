@@ -1,13 +1,15 @@
 package com.mp4splitmaven.helperclass;
 
-import com.mp4splitmaven.LoggingHandler;
+import com.mp4splitmaven.logging.Multilogger;
 import com.mp4splitmaven.Settings;
+import com.mp4splitmaven.logging.Logging;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 public class TimeStampManager {
 
+    private Logging loggingHandler = Multilogger.getInstance();
 
     private long startStamp;
     private long endStamp;
@@ -24,12 +26,12 @@ public class TimeStampManager {
 
     public void addNewTimeStamp() {
         timeStampToCut.add(new Date().getTime());
-        LoggingHandler.println(LoggingHandler.DEBUG,"new Timestamp ["+new Date().getTime()+"]");
+        loggingHandler.println(Multilogger.DEBUG,"new Timestamp ["+new Date().getTime()+"]");
     }
 
     public void addNewTimeStampMock(Long timeStamp) {
         timeStampToCut.add(timeStamp);
-        LoggingHandler.println(LoggingHandler.DEBUG,"new Timestamp ["+timeStamp+"]");
+        loggingHandler.println(Multilogger.DEBUG,"new Timestamp ["+timeStamp+"]");
     }
 
     public void clipHasEnded(){
@@ -40,32 +42,32 @@ public class TimeStampManager {
 
         startStamp = endStamp - (videoLengthInSeconds*1000);
 
-        LoggingHandler.println(LoggingHandler.DEBUG,"StartStamp [" +startStamp+"]");
-        LoggingHandler.println(LoggingHandler.DEBUG,"EndStamp [" + endStamp+"]");
+        loggingHandler.println(Multilogger.DEBUG,"StartStamp [" +startStamp+"]");
+        loggingHandler.println(Multilogger.DEBUG,"EndStamp [" + endStamp+"]");
 
 
         for(long timetoCut : timeStampToCut.toArray(new Long[0])) {
             if(startStamp < timetoCut) {
                 if (startStamp+clipLength < timetoCut) {
                     cutStartTimeStamp.add(timetoCut - clipLength - startStamp);
-                    LoggingHandler.println(LoggingHandler.DEBUG,"Starting Time [" + (timetoCut - clipLength - startStamp)+"]");
+                    loggingHandler.println(Multilogger.DEBUG,"Starting Time [" + (timetoCut - clipLength - startStamp)+"]");
                 } else {
                     cutStartTimeStamp.add(startStamp-startStamp);
-                    LoggingHandler.println(LoggingHandler.DEBUG,"Starting Time [" + (startStamp-startStamp)+"]");
+                    loggingHandler.println(Multilogger.DEBUG,"Starting Time [" + (startStamp-startStamp)+"]");
                 }
 
                 cutStopTimeStamp.add(timetoCut- startStamp);
-                LoggingHandler.println(LoggingHandler.DEBUG,"Stopping Time [" + (timetoCut - startStamp)+"]");
+                loggingHandler.println(Multilogger.DEBUG,"Stopping Time [" + (timetoCut - startStamp)+"]");
 
 
             }else {
-                LoggingHandler.println(LoggingHandler.DEBUG,"Cliptimestamp is befor Startingpoint");
+                loggingHandler.println(Multilogger.DEBUG,"Cliptimestamp is befor Startingpoint");
             }
         }
 
         for(int i = 0; i < cutStartTimeStamp.size(); i++) {
             clipLengthToCut.add(cutStopTimeStamp.get(i) - cutStartTimeStamp.get(i));
-            LoggingHandler.println(LoggingHandler.DEBUG,"Clip number ["+i+"] length is [" + clipLengthToCut.get(i)+"]");
+            loggingHandler.println(Multilogger.DEBUG,"Clip number ["+i+"] length is [" + clipLengthToCut.get(i)+"]");
         }
     }
 
@@ -74,10 +76,10 @@ public class TimeStampManager {
             long secs = miliSeconds / 1000;
 
             String newFormat = String.format("%02d:%02d:%02d", secs / 3600, (secs % 3600) / 60, secs % 60);
-            LoggingHandler.println(LoggingHandler.DEBUG,"Timestamp ["+ miliSeconds +"] to Format 00:00:00 ["+ (newFormat) +"]");
+            loggingHandler.println(Multilogger.DEBUG,"Timestamp ["+ miliSeconds +"] to Format 00:00:00 ["+ (newFormat) +"]");
             return newFormat;
         }
-        LoggingHandler.println(LoggingHandler.WARN,"FormatTime encountered a negative value");
+        loggingHandler.println(Multilogger.WARN,"FormatTime encountered a negative value");
         return "00:00:00";
     }
 

@@ -1,7 +1,8 @@
 package com.mp4splitmaven.screen;
 
 import com.mp4splitmaven.FinalCut;
-import com.mp4splitmaven.LoggingHandler;
+import com.mp4splitmaven.logging.Multilogger;
+import com.mp4splitmaven.logging.Logging;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,8 +42,7 @@ public abstract class ScreenVariables {
 
     protected static final String UI_STARTFINALCUT = "Do you really want to execute FinalCut?";
 
-    public static final int IS_CUTTING = 1;
-    public static final int IS_NOTCUTTING = 0;
+    Logging loggingHandler = Multilogger.getInstance();
 
     protected JFrame frame;
     protected JPanel cards = new JPanel(new CardLayout());
@@ -133,7 +133,7 @@ public abstract class ScreenVariables {
         try {
             Desktop.getDesktop().browse(new URL(link).toURI());
         } catch (Exception ex) {
-            LoggingHandler.println(LoggingHandler.ERROR,"Could not open default browser",ex);
+            loggingHandler.println(Multilogger.ERROR,"Could not open default browser",ex);
         }
     }
 }

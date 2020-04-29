@@ -1,4 +1,4 @@
-package com.mp4splitmaven.logging;
+package com.mp4splitmaven.logging.logger;
 
 public interface Logger {
 

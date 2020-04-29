@@ -3,19 +3,20 @@ package com.mp4splitmaven;
 
 import com.mp4splitmaven.helperclass.FfmpegManager;
 import com.mp4splitmaven.helperclass.TimeStampManager;
+import com.mp4splitmaven.logging.Logging;
+import com.mp4splitmaven.logging.Multilogger;
 
 import java.io.File;
 import java.util.ArrayList;
 
 public class FinalCut {
 
+    private Logging loggingHandler = Multilogger.getInstance();
+    private FfmpegManager ffmpegManager = new FfmpegManager();
+    private Settings settings = Settings.getInstance();
 
-    FfmpegManager ffmpegManager = new FfmpegManager();
-    Settings settings = Settings.getInstance();
+    public FinalCut() {}
 
-    public FinalCut() {
-
-    }
     public void finalCut() {
         {
             try {
@@ -33,7 +34,7 @@ public class FinalCut {
                 }
 
             }catch (Exception e){
-                LoggingHandler.println(LoggingHandler.FATAL,"There was a problem trying to cut the video exact", e);
+                loggingHandler.println(Multilogger.FATAL,"There was a problem trying to cut the video exact", e);
             }
         }
     }
@@ -48,7 +49,7 @@ public class FinalCut {
                 names.add(file.getName());
             }
         }catch (Exception e) {
-            LoggingHandler.println(LoggingHandler.WARN, "There was a problem trying to find the Files", e);
+            loggingHandler.println(Multilogger.WARN, "There was a problem trying to find the Files", e);
         }
         return names.toArray(new String[0]);
     }
@@ -71,7 +72,7 @@ public class FinalCut {
             }
             throw new Exception();
         }catch (Exception e){
-            LoggingHandler.println(LoggingHandler.FATAL, "Can't find original File", e);
+            loggingHandler.println(Multilogger.FATAL, "Can't find original File", e);
             throw new Exception();
         }
     }
@@ -93,7 +94,7 @@ public class FinalCut {
                 }
             }
         }catch (Exception e){
-            LoggingHandler.println(LoggingHandler.FATAL, "Can't find original File in Subfolder", e);
+            loggingHandler.println(Multilogger.FATAL, "Can't find original File in Subfolder", e);
         }
         return null;
     }

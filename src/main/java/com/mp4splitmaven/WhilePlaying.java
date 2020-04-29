@@ -3,6 +3,9 @@ package com.mp4splitmaven;
 import com.mp4splitmaven.helperclass.FfmpegManager;
 import com.mp4splitmaven.helperclass.InputFileManager;
 import com.mp4splitmaven.helperclass.TimeStampManager;
+import com.mp4splitmaven.logging.Logging;
+import com.mp4splitmaven.logging.Multilogger;
+import com.mp4splitmaven.screen.ScreenManager;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
@@ -12,15 +15,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class WhilePlaying implements NativeKeyListener {
-    int lastKeyCode = 0;
-    int clipPressOne = NativeKeyEvent.VC_ALT;
-    int clipPressTwo = NativeKeyEvent.VC_0;
+    private int lastKeyCode = 0;
+    private int clipPressOne = NativeKeyEvent.VC_ALT;
+    private int clipPressTwo = NativeKeyEvent.VC_0;
 
-    int stopPressOne = NativeKeyEvent.VC_ALT;
-    int stopPressTwo = NativeKeyEvent.VC_9;
+    private int stopPressOne = NativeKeyEvent.VC_ALT;
+    private int stopPressTwo = NativeKeyEvent.VC_9;
 
-    TimeStampManager timeStampManager = null;
-    Settings settings = Settings.getInstance();
+    private ScreenManager screenManager = ScreenManager.getInstace();
+    private Logging loggingHandler = Multilogger.getInstance();
+
+    private TimeStampManager timeStampManager = null;
+    private Settings settings = Settings.getInstance();
 
     public WhilePlaying() {
 
@@ -38,10 +44,10 @@ public class WhilePlaying implements NativeKeyListener {
 
         try {
             GlobalScreen.registerNativeHook();
-            LoggingHandler.println(LoggingHandler.INFO,"Activated Macro detection");
+            loggingHandler.println(Multilogger.INFO,"Activated Macro detection");
         }
         catch (NativeHookException ex) {
-            LoggingHandler.println(LoggingHandler.FATAL,"There was a problem starting the Keylogger. \n", ex);
+            loggingHandler.println(Multilogger.FATAL,"There was a problem starting the Keylogger. \n", ex);
 
 
             System.exit(1);
@@ -53,12 +59,12 @@ public class WhilePlaying implements NativeKeyListener {
         try {
             GlobalScreen.unregisterNativeHook();
         } catch (NativeHookException ex) {
-            LoggingHandler.println(LoggingHandler.FATAL,"There was a problem stopping the Keylogger. \n", ex);
+            loggingHandler.println(Multilogger.FATAL,"There was a problem stopping the Keylogger. \n", ex);
         }
     }
 
     public void nativeKeyPressed(NativeKeyEvent e) {
-        LoggingHandler.printlnNoIO(LoggingHandler.KEYPRESS,"Key Pressed [" + NativeKeyEvent.getKeyText(e.getKeyCode())+"]\n");
+        loggingHandler.printlnNoIO(Multilogger.KEYPRESS,"Key Pressed [" + NativeKeyEvent.getKeyText(e.getKeyCode())+"]\n");
 
         if(checkForDoubleKeyCode(lastKeyCode,e.getKeyCode(),clipPressOne,clipPressTwo)) {
             createNewTimeStamp();
@@ -76,37 +82,36 @@ public class WhilePlaying implements NativeKeyListener {
     public void nativeKeyTyped(NativeKeyEvent e) {}
 
     private void cutVideo() {
-        LoggingHandler.println(LoggingHandler.INFO,"Video stop macro");
+        loggingHandler.println(Multilogger.INFO,"Video stop macro");
         if (timeStampManager != null) {
             try {
-                LoggingHandler.println(LoggingHandler.DEBUG, "video needs to be cut");
+                loggingHandler.println(Multilogger.DEBUG, "video needs to be cut");
+                screenManager.isCurrentlyCutting(true);
+
                 timeStampManager.clipHasEnded();
 
                 if (hasCutWithoutError()) {
-                    LoggingHandler.println(LoggingHandler.INFO,"Video was cut successfully");
+                    loggingHandler.println(Multilogger.INFO,"Video was cut successfully");
                 }else {
                     throw new Exception();
                 }
 
             }catch (Exception e) {
-                LoggingHandler.println(LoggingHandler.FATAL, "Video could not be cut: ",e);
-                //TODO REIMPLEMENT THIS
-                //LoggingHandler.displayIsNotCutting();
+                loggingHandler.println(Multilogger.FATAL, "Video could not be cut: ",e);
                 timeStampManager = null;
             }
         }else{
-            LoggingHandler.println(LoggingHandler.DEBUG, "Video doesn't need to be cut");
+            loggingHandler.println(Multilogger.DEBUG, "Video doesn't need to be cut");
         }
-        //TODO REIMPLEMENT THIS
-        //LoggingHandler.displayIsNotCutting();
-        LoggingHandler.printlnNoIO(LoggingHandler.INFO,"----------");
+        screenManager.isCurrentlyCutting(false);
+        loggingHandler.printlnNoIO(Multilogger.INFO,"----------");
     }
 
     private boolean hasCutWithoutError(){
         for(int i = 0; i < settings.getTrysToCut(); i++) {
             try {
                 waitFor(settings.getSecondsUntilCut());
-                String inputFileLocation = InputFileManager.lastFileModified(settings.getInputLocationt());
+                String inputFileLocation = new InputFileManager().lastFileModified(settings.getInputLocationt());
 
                 FfmpegManager f = new FfmpegManager();
                 timeStampManager.prepareTimeStamp(f.getVideoLength(Settings.FFPROBE_LOCATION, inputFileLocation));
@@ -114,8 +119,8 @@ public class WhilePlaying implements NativeKeyListener {
                 timeStampManager = null;
                 return true;
             }catch (Exception e){
-                LoggingHandler.println(LoggingHandler.WARN, "Video could not be cut: ", e);
-                LoggingHandler.println(LoggingHandler.DEBUG, "Trying again "+i+"/"+settings.getTrysToCut());
+                loggingHandler.println(Multilogger.WARN, "Video could not be cut: ", e);
+                loggingHandler.println(Multilogger.DEBUG, "Trying again "+i+"/"+settings.getTrysToCut());
             }
         }
         return false;
@@ -126,16 +131,15 @@ public class WhilePlaying implements NativeKeyListener {
             timeStampManager = new TimeStampManager();
         }
         timeStampManager.addNewTimeStamp();
-        //TODO REIMPLEMENT THIS
-        //LoggingHandler.displayNumberOfTimestamps(timeStampManager.getAmountOfStamps());
-        LoggingHandler.println(LoggingHandler.INFO,"Timestamp has been set");
+        screenManager.displayNumberOfTimestamp(timeStampManager.getAmountOfStamps());
+        loggingHandler.println(Multilogger.INFO,"Timestamp has been set");
     }
 
     private void turnOffLog() {
         Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
         logger.setLevel(Level.OFF);
         logger.setUseParentHandlers(false);
-        LoggingHandler.println(LoggingHandler.DEBUG,"Turned off Keylog log");
+        loggingHandler.println(Multilogger.DEBUG,"Turned off Keylog log");
     }
 
 
@@ -144,11 +148,11 @@ public class WhilePlaying implements NativeKeyListener {
     }
 
     private void waitFor(int seconds) throws Exception {
-        LoggingHandler.println(LoggingHandler.DEBUG,"Waiting for [" + seconds + "] seconds");
+        loggingHandler.println(Multilogger.DEBUG,"Waiting for [" + seconds + "] seconds");
         try {
             Thread.sleep(seconds*1000);
         } catch (InterruptedException e) {
-            LoggingHandler.println(LoggingHandler.ERROR,"The was a problem while trying to wait: ", e);
+            loggingHandler.println(Multilogger.ERROR,"The was a problem while trying to wait: ", e);
             throw new Exception();
         }
     }

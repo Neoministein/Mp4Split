@@ -1,11 +1,11 @@
-package com.mp4splitmaven.logging;
+package com.mp4splitmaven.logging.logger;
 
 import com.mp4splitmaven.screen.ScreenManager;
 
 public class ScreenLogger implements Logger {
 
-    int logLevel;
-    ScreenManager screenManager;
+    private int logLevel;
+    private ScreenManager screenManager;
 
     public ScreenLogger(int logLevel,ScreenManager screenManager){
         this.logLevel = logLevel;

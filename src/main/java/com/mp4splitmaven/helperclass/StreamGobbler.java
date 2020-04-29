@@ -1,12 +1,15 @@
 package com.mp4splitmaven.helperclass;
 
-import com.mp4splitmaven.LoggingHandler;
+import com.mp4splitmaven.logging.Multilogger;
+import com.mp4splitmaven.logging.Logging;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 
 class StreamGobbler implements Runnable {
+    private Logging loggingHandler = Multilogger.getInstance();
+
     private final InputStream is;
     private final PrintStream os;
 
@@ -16,13 +19,13 @@ class StreamGobbler implements Runnable {
     }
 
     public void run() {
-        LoggingHandler.println(LoggingHandler.DEBUG,"Console output:");
+        loggingHandler.println(Multilogger.DEBUG,"Console output:");
         try {
             int c;
             while ((c = is.read()) != -1)
-                LoggingHandler.printNoIO(LoggingHandler.DEBUG, (char) c + "");
+                loggingHandler.printNoIO(Multilogger.DEBUG, (char) c + "");
         } catch (IOException e) {
-            LoggingHandler.println(LoggingHandler.WARN,"There was a problem trying to manage the OutputStream", e);
+            loggingHandler.println(Multilogger.WARN,"There was a problem trying to manage the OutputStream", e);
         }
     }
 

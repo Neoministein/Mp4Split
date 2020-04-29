@@ -1,4 +1,4 @@
-package com.mp4splitmaven.logging;
+package com.mp4splitmaven.logging.logger;
 
 import com.mp4splitmaven.helperclass.FileManager;
 
@@ -7,8 +7,10 @@ import java.text.SimpleDateFormat;
 
 public class LogfileLogger implements Logger {
 
-    private int logLevel = Integer.MAX_VALUE;
-    private String logLocation;
+    private static final String BASELOCATION = System.getProperty("user.dir") +"\\logs\\";
+
+    private final int logLevel = Integer.MAX_VALUE;
+    private final String logLocation;
 
 
     public LogfileLogger(){
@@ -22,7 +24,7 @@ public class LogfileLogger implements Logger {
 
     private String createDebugFile() {
 
-        String logFileLocation = System.getProperty("user.dir") +"\\logs\\"+
+        String logFileLocation = BASELOCATION +
                 (new SimpleDateFormat("yyyy.MM.dd - HH.mm.ss").format(
                         new Timestamp(System.currentTimeMillis())) +
                         ".txt").replace(":",".");
