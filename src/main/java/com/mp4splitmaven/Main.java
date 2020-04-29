@@ -7,9 +7,9 @@ import com.mp4splitmaven.screen.ScreenManager;
 
 public class Main {
 
-    Multilogger multilogger =  Multilogger.getInstance();
-    Settings settings = Settings.getInstance();
-    ScreenManager screenManager = ScreenManager.getInstace();
+    private Multilogger multilogger =  Multilogger.getInstance();
+    private Settings settings = Settings.getInstance();
+    private ScreenManager screenManager = ScreenManager.getInstace();
 
     public static void main(String args[]) {
         Main main = new Main();
