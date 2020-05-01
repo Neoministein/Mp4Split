@@ -31,7 +31,7 @@ public class Multilogger implements Logging {
     }
 
     public void println(int loggingLevel, String text, Exception exception){
-        print(loggingLevel,text+getStackTrace(exception)+"\n");
+        print(loggingLevel,text+Logging.stackTraceToString(exception)+"\n");
     }
 
     public void print(int loggingLevel,String text){
@@ -44,7 +44,7 @@ public class Multilogger implements Logging {
     public void printlnNoIO(int loggingLevel, String text) {printNoIO(loggingLevel,text+"\n");}
 
     public void printlnNoIO(int loggingLevel, String text, Exception exception){
-        printNoIO(loggingLevel,text+getStackTrace(exception)+"\n");
+        printNoIO(loggingLevel,text+Logging.stackTraceToString(exception)+"\n");
     }
 
     public void printNoIO(int loggingLevel,String text){
@@ -112,18 +112,5 @@ public class Multilogger implements Logging {
 
     public void clearLogger(){
         loggers.clear();
-    }
-
-    private String getStackTrace(Exception exception){
-        String stackTrace = ("\n"+exception.getStackTrace()[0].getClassName()+": "+exception.getMessage());
-        for(StackTraceElement stackTraceElement: exception.getStackTrace()) {
-
-            stackTrace +=("\n"+"at "+stackTraceElement.getClassName()+
-                    "."+stackTraceElement.getMethodName()+
-                    "("+stackTraceElement.getMethodName()+
-                    "."+stackTraceElement.getLineNumber()+")");
-
-        }
-        return stackTrace;
     }
 }

@@ -37,4 +37,17 @@ public interface Logging {
         }
     }
 
+    static String stackTraceToString(Exception exception){
+        String stackTrace = ("\n"+exception.getStackTrace()[0].getClassName()+": "+exception.getMessage());
+        for(StackTraceElement stackTraceElement: exception.getStackTrace()) {
+
+            stackTrace +=("\n"+"at "+stackTraceElement.getClassName()+
+                    "."+stackTraceElement.getMethodName()+
+                    "("+stackTraceElement.getMethodName()+
+                    "."+stackTraceElement.getLineNumber()+")");
+
+        }
+        return stackTrace;
+    }
+
 }
