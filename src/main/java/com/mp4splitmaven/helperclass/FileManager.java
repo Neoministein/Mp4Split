@@ -9,9 +9,8 @@ import java.util.List;
 
 public class FileManager {
 
-    private static Logging loggingHandler = Multilogger.getInstance();
-
     public static String[] readFile (String location) {
+        Logging loggingHandler = Multilogger.getInstance();
         try {
             FileReader fileReader = new FileReader(System.getProperty("user.dir")+"\\"+location);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -32,6 +31,7 @@ public class FileManager {
     }
 
     public static String readLineToSting(String location,int line) {
+        Logging loggingHandler = Multilogger.getInstance();
         try {
             String l = readFile(location)[line];
             String value = l.substring(l.indexOf(":")+1);
@@ -44,6 +44,7 @@ public class FileManager {
     }
 
     public static int readLineToInt(String location,int line) {
+        Logging loggingHandler = Multilogger.getInstance();
         String l = readFile(location)[line];
         try {
             int value = Integer.parseInt(l.substring(l.indexOf(":")+1));
@@ -56,6 +57,7 @@ public class FileManager {
     }
 
     public static boolean readLineToBoolan(String location,int line) {
+        Logging loggingHandler = Multilogger.getInstance();
         String l = readFile(location)[line];
         try {
             boolean value = Boolean.parseBoolean(l.replaceAll(" ","").substring((l.replaceAll(" ","").indexOf(":")+1)));
@@ -68,6 +70,7 @@ public class FileManager {
     }
 
     public static void writeToFile(String location, String fileContent) {
+        Logging loggingHandler = Multilogger.getInstance();
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(location,true));
             writer.write(fileContent);
@@ -77,6 +80,7 @@ public class FileManager {
         }
     }
     public static void createFile(String location){
+        Logging loggingHandler = Multilogger.getInstance();
         try {
             new File(location).createNewFile();
 
