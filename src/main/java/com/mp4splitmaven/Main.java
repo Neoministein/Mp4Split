@@ -30,13 +30,11 @@ public class Main {
                     main.startScreen();
                     main.runFinalCut();
                     break;
-                default:
-                    main.runWhilePlaying();
-                    break;
             }
+        } else {
+            main.startScreen();
+            main.runWhilePlaying();
         }
-        main.startScreen();
-        main.runWhilePlaying();
     }
 
     public void runWhilePlaying() {
