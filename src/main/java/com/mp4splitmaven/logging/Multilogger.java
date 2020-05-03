@@ -15,10 +15,9 @@ public class Multilogger implements Logging {
     private String stringToLog = "";
 
     private static Multilogger instance = new Multilogger();
-    private List<Logger> loggers;
+    private List<Logger> loggers = new ArrayList<>();
 
     private Multilogger() {
-        loggers = new ArrayList<>();
         addLogger(new LogfileLogger());
     }
     public static Multilogger getInstance() {
