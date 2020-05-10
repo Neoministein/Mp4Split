@@ -29,6 +29,10 @@ Both ffmpeg.exe and ffprobe.exe which are used in the project are not uploaded t
 
 To get the project up and running you can either check out the project using an SVN or download the project as a zip file and import it in to your programming  environment of choice as a maven project. After that you'll need to copy Ffmpeg.exe and Ffprobe.exe into the base directory of the project.
 
+**Important**
+This project uses the not openly available dependency NeoUtil.
+You can contact me to receive access to it.
+
 ## Deployment
 
 To deploy the project I used this following command: 
@@ -41,10 +45,11 @@ mvn clean compile assembly:single
 
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [JNativeHook](https://github.com/kwhat/jnativehook) - Keyboard Listener for activation macro
+* NeoUtil - Logging and File Handeling
 
 ## Authors
 
-* **Neoministein** - *Initial work* - [Neoministein](https://www.youtube.com/channel/UCtfBiBXVXqTotONMq6VSMbg)
+* **Neoministein** - *Initial work* - [Neoministein](https://www.youtube.com/channel/UCtfBiBXVXqTotONMq6VSMbg) Neoministein#1245
 
 ## License
 
