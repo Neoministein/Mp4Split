@@ -3,8 +3,8 @@ package com.mp4splitmaven;
 
 import com.mp4splitmaven.helperclass.FfmpegManager;
 import com.mp4splitmaven.helperclass.TimeStampManager;
-import com.mp4splitmaven.logging.Logging;
-import com.mp4splitmaven.logging.Multilogger;
+import com.neoutil.logging.Logging;
+import com.neoutil.logging.Multilogger;
 
 import java.io.File;
 import java.util.ArrayList;

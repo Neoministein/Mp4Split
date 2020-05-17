@@ -1,7 +1,7 @@
 package com.mp4splitmaven;
 
-import com.mp4splitmaven.logging.Multilogger;
-import com.mp4splitmaven.logging.logger.ConsoleLogger;
+import com.neoutil.logging.Multilogger;
+import com.neoutil.logging.logger.ConsoleLogger;
 import com.mp4splitmaven.logging.logger.ScreenLogger;
 import com.mp4splitmaven.screen.ScreenManager;
 
@@ -44,7 +44,7 @@ public class Main {
         whilePlaying.startKeyLogger();
     }
     public void runFinalCut() {
-        multilogger.addLogger(new ConsoleLogger(settings.getDebuglevel()));
+        multilogger.addLogger(new ConsoleLogger(20));
         FinalCut finalCut = new FinalCut();
 
         finalCut.finalCut();

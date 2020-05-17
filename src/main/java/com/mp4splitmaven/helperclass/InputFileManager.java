@@ -1,7 +1,7 @@
 package com.mp4splitmaven.helperclass;
 
-import com.mp4splitmaven.logging.Multilogger;
-import com.mp4splitmaven.logging.Logging;
+import com.neoutil.logging.Multilogger;
+import com.neoutil.logging.Logging;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,7 +45,7 @@ public class InputFileManager {
                 }
             }
         }catch (Exception e) {
-            loggingHandler.println(Multilogger.FATAL,"There was a Problem trying to find the newest file: ", e);
+            loggingHandler.println(Multilogger.ERROR,"There was a Problem trying to find the newest file: ", e);
             throw new Exception();
         }
 

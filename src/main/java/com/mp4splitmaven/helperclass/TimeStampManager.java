@@ -1,8 +1,8 @@
 package com.mp4splitmaven.helperclass;
 
-import com.mp4splitmaven.logging.Multilogger;
+import com.neoutil.logging.Multilogger;
 import com.mp4splitmaven.Settings;
-import com.mp4splitmaven.logging.Logging;
+import com.neoutil.logging.Logging;
 
 import java.util.ArrayList;
 import java.util.Date;

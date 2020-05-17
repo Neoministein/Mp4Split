@@ -1,7 +1,7 @@
 package com.mp4splitmaven.helperclass;
 
-import com.mp4splitmaven.logging.Multilogger;
-import com.mp4splitmaven.logging.Logging;
+import com.neoutil.logging.Multilogger;
+import com.neoutil.logging.Logging;
 
 import java.io.IOException;
 import java.io.InputStream;

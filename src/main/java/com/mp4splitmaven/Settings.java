@@ -1,6 +1,6 @@
 package com.mp4splitmaven;
 
-import com.mp4splitmaven.helperclass.FileManager;
+import com.neoutil.file.FileReader;
 
 public class Settings {
 
@@ -35,15 +35,15 @@ public class Settings {
 
     public void loadSettings() {
         System.out.println("Load settings");
-        debuglevel = FileManager.readLineToInt(SETTINGS_LOCATION,3);
-        clipLength = FileManager.readLineToInt(SETTINGS_LOCATION,4);
-        secondsUntilCut = FileManager.readLineToInt(SETTINGS_LOCATION,5);
-        trysToCut = FileManager.readLineToInt(SETTINGS_LOCATION,6);
-        inputLocation = FileManager.readLineToSting(SETTINGS_LOCATION,7);
-        clipPressOne = FileManager.readLineToInt(SETTINGS_LOCATION,8);
-        clipPressTwo = FileManager.readLineToInt(SETTINGS_LOCATION,9);
-        stopPressOne = FileManager.readLineToInt(SETTINGS_LOCATION,10);
-        stopPressTwo = FileManager.readLineToInt(SETTINGS_LOCATION,11);
+        debuglevel = FileReader.readLineToInt(SETTINGS_LOCATION,3);
+        clipLength = FileReader.readLineToInt(SETTINGS_LOCATION,4);
+        secondsUntilCut = FileReader.readLineToInt(SETTINGS_LOCATION,5);
+        trysToCut = FileReader.readLineToInt(SETTINGS_LOCATION,6);
+        inputLocation = FileReader.readLineToSting(SETTINGS_LOCATION,7);
+        clipPressOne = FileReader.readLineToInt(SETTINGS_LOCATION,8);
+        clipPressTwo = FileReader.readLineToInt(SETTINGS_LOCATION,9);
+        stopPressOne = FileReader.readLineToInt(SETTINGS_LOCATION,10);
+        stopPressTwo = FileReader.readLineToInt(SETTINGS_LOCATION,11);
     }
 
     public int getDebuglevel() {

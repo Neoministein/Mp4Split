@@ -1,8 +1,8 @@
 package com.mp4splitmaven.screen;
 
 import com.mp4splitmaven.FinalCut;
-import com.mp4splitmaven.logging.Multilogger;
-import com.mp4splitmaven.logging.Logging;
+import com.neoutil.logging.Multilogger;
+import com.neoutil.logging.Logging;
 
 import javax.swing.*;
 import java.awt.*;

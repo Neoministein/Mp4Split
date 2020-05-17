@@ -1,6 +1,7 @@
 package com.mp4splitmaven.logging.logger;
 
 import com.mp4splitmaven.screen.ScreenManager;
+import com.neoutil.logging.logger.Logger;
 
 public class ScreenLogger implements Logger {
 

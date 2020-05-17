@@ -3,8 +3,8 @@ package com.mp4splitmaven;
 import com.mp4splitmaven.helperclass.FfmpegManager;
 import com.mp4splitmaven.helperclass.InputFileManager;
 import com.mp4splitmaven.helperclass.TimeStampManager;
-import com.mp4splitmaven.logging.Logging;
-import com.mp4splitmaven.logging.Multilogger;
+import com.neoutil.logging.Logging;
+import com.neoutil.logging.Multilogger;
 import com.mp4splitmaven.screen.ScreenManager;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
@@ -15,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class WhilePlaying implements NativeKeyListener {
+    private static final int KEYPRESS = 5;
+
     private int lastKeyCode = 0;
     private int clipPressOne = NativeKeyEvent.VC_ALT;
     private int clipPressTwo = NativeKeyEvent.VC_0;
@@ -64,7 +66,7 @@ public class WhilePlaying implements NativeKeyListener {
     }
 
     public void nativeKeyPressed(NativeKeyEvent e) {
-        loggingHandler.printlnNoIO(Multilogger.KEYPRESS,"Key Pressed [" + NativeKeyEvent.getKeyText(e.getKeyCode())+"]\n");
+        loggingHandler.printlnNoIO(KEYPRESS,"Key Pressed [" + NativeKeyEvent.getKeyText(e.getKeyCode())+"]\n");
 
         if(checkForDoubleKeyCode(lastKeyCode,e.getKeyCode(),clipPressOne,clipPressTwo)) {
             createNewTimeStamp();
@@ -119,8 +121,8 @@ public class WhilePlaying implements NativeKeyListener {
                 timeStampManager = null;
                 return true;
             }catch (Exception e){
-                loggingHandler.println(Multilogger.WARN, "Video could not be cut: ", e);
-                loggingHandler.println(Multilogger.DEBUG, "Trying again "+i+"/"+settings.getTrysToCut());
+                loggingHandler.println(Multilogger.WARN, "Video could not be cut");
+                loggingHandler.println(Multilogger.INFO, "Trying again "+i+"/"+settings.getTrysToCut());
             }
         }
         return false;
