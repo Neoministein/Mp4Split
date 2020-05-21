@@ -6,6 +6,7 @@ ClipLength:30
 SecondsUntilCut:10
 TrysToCut:10
 FileLocation:C:\Users\Default\Videos
+FatalFile:true
 TimestampMacroOne:56
 TimestampMacroTwo:11
 CutVideoMacroOne:56

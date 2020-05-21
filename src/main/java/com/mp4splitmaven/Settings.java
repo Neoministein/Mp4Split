@@ -16,6 +16,7 @@ public class Settings {
     private int secondsUntilCut;
     private int trysToCut;
     private String inputLocation;
+    private boolean fatalLoggerActive;
 
     private int clipPressOne;
     private int clipPressTwo;
@@ -40,10 +41,11 @@ public class Settings {
         secondsUntilCut = FileReader.readLineToInt(SETTINGS_LOCATION,5);
         trysToCut = FileReader.readLineToInt(SETTINGS_LOCATION,6);
         inputLocation = FileReader.readLineToSting(SETTINGS_LOCATION,7);
-        clipPressOne = FileReader.readLineToInt(SETTINGS_LOCATION,8);
-        clipPressTwo = FileReader.readLineToInt(SETTINGS_LOCATION,9);
-        stopPressOne = FileReader.readLineToInt(SETTINGS_LOCATION,10);
-        stopPressTwo = FileReader.readLineToInt(SETTINGS_LOCATION,11);
+        fatalLoggerActive = FileReader.readLineToBoolan(SETTINGS_LOCATION,8);
+        clipPressOne = FileReader.readLineToInt(SETTINGS_LOCATION,9);
+        clipPressTwo = FileReader.readLineToInt(SETTINGS_LOCATION,10);
+        stopPressOne = FileReader.readLineToInt(SETTINGS_LOCATION,11);
+        stopPressTwo = FileReader.readLineToInt(SETTINGS_LOCATION,12);
     }
 
     public int getDebuglevel() {
@@ -60,6 +62,9 @@ public class Settings {
     }
     public String getInputLocationt() {
         return inputLocation;
+    }
+    public boolean isFatalLoggerActive() {
+        return fatalLoggerActive;
     }
     public int getClipPressOne() {
         return clipPressOne;

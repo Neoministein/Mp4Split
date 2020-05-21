@@ -1,17 +1,21 @@
 package com.mp4splitmaven;
 
+import com.neoutil.logging.Logging;
 import com.neoutil.logging.Multilogger;
 import com.neoutil.logging.logger.ConsoleLogger;
 import com.mp4splitmaven.logging.logger.ScreenLogger;
 import com.mp4splitmaven.screen.ScreenManager;
+import com.neoutil.logging.logger.LogfileLogger;
 
 public class Main {
+
+    private static final int FINALCUT_DEBUG_LEVEL = 20;
 
     private Multilogger multilogger =  Multilogger.getInstance();
     private Settings settings = Settings.getInstance();
     private ScreenManager screenManager = ScreenManager.getInstace();
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Main main = new Main();
         if(args.length != 0) {
             System.out.println(args[0]);
@@ -38,13 +42,13 @@ public class Main {
     }
 
     public void runWhilePlaying() {
-        multilogger.addLogger(new ConsoleLogger(settings.getDebuglevel()));
+        startLogger(settings.getDebuglevel());
 
         WhilePlaying whilePlaying = new WhilePlaying();
         whilePlaying.startKeyLogger();
     }
     public void runFinalCut() {
-        multilogger.addLogger(new ConsoleLogger(20));
+        startLogger(FINALCUT_DEBUG_LEVEL);
         FinalCut finalCut = new FinalCut();
 
         finalCut.finalCut();
@@ -52,5 +56,14 @@ public class Main {
     public void startScreen(){
         screenManager.setScreenVisible(true);
         multilogger.addLogger(new ScreenLogger( settings.getDebuglevel() ,screenManager));
+    }
+
+    private void startLogger(int debugLevel){
+        multilogger.addLogger(new ConsoleLogger(debugLevel));
+
+        if (settings.isFatalLoggerActive()){
+            String currentDir = System.getProperty("user.dir");
+            multilogger.addLogger(new LogfileLogger(currentDir, Logging.FATAL));
+        }
     }
 }

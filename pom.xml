@@ -6,7 +6,7 @@
 
   <groupId>com.mp4splitmaven</groupId>
   <artifactId>mp4splitmaven</artifactId>
-  <version>1.2.6</version>
+  <version>1.2.7</version>
 
   <name>mp4splitmaven</name>
   <!-- FIXME change it to the project's website -->
@@ -29,7 +29,7 @@
     <dependency>
       <groupId>com.neoutil</groupId>
       <artifactId>neoutil</artifactId>
-      <version>1.0.0</version>
+      <version>1.0.4</version>
     </dependency>
 
   </dependencies>
