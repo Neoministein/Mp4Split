@@ -1,5 +1,5 @@
 #This file is used to change that determin who the application functions
-#Please only change the values behinde ":" and do add any new Lines
+#Please only change the values behinde ":" and do not add any new Lines
 #
 DebugLevel:3
 ClipLength:30
