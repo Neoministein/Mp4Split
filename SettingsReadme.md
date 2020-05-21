@@ -33,6 +33,11 @@ If the program can't access the video trysToCut is the amount of times the progr
 ###### Default : C:\Users\Default\Videos
 This is the location Mp4Split will look for the newest created Video to cut.
 
+## FatalFile:
+
+###### Default : true
+If a fatal error occurs a file create in the main directory to inform you on what happened.
+
 ## Macro
 
 If you want to change it you please see [List](MacroList.md)
