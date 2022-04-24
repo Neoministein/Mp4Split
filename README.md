@@ -31,7 +31,7 @@ To get the project up and running you can either check out the project using an 
 
 **Important**
 This project uses the NeoUtil project as a dependency.
-You can find the project [here](https://github.com/Neoministein/NeoUtil).
+You can find the project [here](https://github.com/Neoministein/NeoUtil/tree/old).
 
 ## Deployment
 
@@ -45,7 +45,7 @@ mvn clean compile assembly:single
 
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [JNativeHook](https://github.com/kwhat/jnativehook) - Keyboard Listener for activation macro
-* NeoUtil - Logging and File Handeling
+* [NeoUtil/Old](https://github.com/Neoministein/NeoUtil/tree/old) - Logging and File Handeling
 
 ## Authors
 
